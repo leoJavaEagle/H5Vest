@@ -16,10 +16,10 @@ Date: 2016-11-05 21:17:33
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `users`
+-- Table structure for `t_users`
 -- ----------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+DROP TABLE IF EXISTS `t_users`;
+CREATE TABLE `t_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `userName` varchar(32) DEFAULT NULL COMMENT '用户名',
   `passWord` varchar(32) DEFAULT NULL COMMENT '密码',
