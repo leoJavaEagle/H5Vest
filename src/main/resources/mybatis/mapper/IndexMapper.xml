@@ -67,7 +67,7 @@
 		SELECT 
 			<include refid="TProduct_Column" />
 		FROM t_product
-		WHERE status = 2
+		WHERE status = '2'
 	</select>
 
 </mapper>

@@ -51,5 +51,12 @@
        WHERE 
        		 id =#{id}
     </delete>
+    
+    <select id="userLogin" resultType="com.neo.entity.UserEntity">
+    	SELECT 
+    		<include refid="Base_Column_List" />
+    	FROM users 
+    	WHERE username = #{username} AND password = #{password}
+    </select>
 
 </mapper>
