@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neo.mapper.IndexMapper">
+	<resultMap id="TProductMap" type="com.neo.entity.TProduct">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="product_type" property="productType"
+			jdbcType="CHAR" />
+		<result column="product_name" property="productName"
+			jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="amount_limit" property="amountLimit"
+			jdbcType="VARCHAR" />
+		<result column="biz_time" property="bizTime" jdbcType="VARCHAR" />
+		<result column="apply_money_start" property="applyMoneyStart"
+			jdbcType="DECIMAL" />
+		<result column="apply_money_end" property="applyMoneyEnd"
+			jdbcType="DECIMAL" />
+		<result column="repayment_types" property="repaymentTypes"
+			jdbcType="VARCHAR" />
+		<result column="borrow_fee_rate" property="borrowFeeRate"
+			jdbcType="DECIMAL" />
+		<result column="is_weiyuejin" property="isWeiyuejin"
+			jdbcType="CHAR" />
+		<result column="weiyuejin_rate" property="weiyuejinRate"
+			jdbcType="DECIMAL" />
+		<result column="service_fee_setting"
+			property="serviceFeeSetting" jdbcType="CHAR" />
+		<result column="overdue_fee_setting"
+			property="overdueFeeSetting" jdbcType="CHAR" />
+		<result column="product_picture_url"
+			property="productPictureUrl" jdbcType="VARCHAR" />
+		<result column="product_overview" property="productOverview"
+			jdbcType="VARCHAR" />
+		<result column="month_rate" property="monthRate"
+			jdbcType="DECIMAL" />
+		<result column="borrow_periods" property="borrowPeriods"
+			jdbcType="VARCHAR" />
+		<result column="product_process_name"
+			property="productProcessName" jdbcType="VARCHAR" />
+		<result column="product_process_id" property="productProcessId"
+			jdbcType="VARCHAR" />
+		<result column="card_template_id" property="cardTemplateId"
+			jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="create_id" property="createId"
+			jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime"
+			jdbcType="TIMESTAMP" />
+		<result column="update_id" property="updateId"
+			jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="is_default" property="isDefault"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="TProduct_Column">
+		id, product_type, product_name, apply_money_start, apply_money_end,
+		repayment_types,
+		borrow_fee_rate, is_weiyuejin, weiyuejin_rate, service_fee_setting,
+		overdue_fee_setting,
+		product_picture_url, product_overview, month_rate, borrow_periods, product_process_name,
+		product_process_id, card_template_id, status, create_id, create_time,
+		update_id,update_time,amount_limit,url,biz_time,is_default
+	</sql>
+	<select id="showIndex" resultMap="TProductMap">
+		SELECT 
+			<include refid="TProduct_Column" />
+		FROM t_product
+		WHERE status = 2
+	</select>
+
+</mapper>
