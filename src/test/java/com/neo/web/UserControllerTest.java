@@ -36,7 +36,7 @@ public class UserControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build(); //初始化MockMvc对象
     }
 
-//    @Test
+    @Test
     public void getUsers() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/getUsers")
                 .accept(MediaType.APPLICATION_JSON_UTF8)).andDo(print());
