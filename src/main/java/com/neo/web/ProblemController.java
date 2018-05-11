@@ -19,9 +19,9 @@ public class ProblemController {
 	@ResponseBody
 	public BaseDataResp showProblem() {
 		BaseDataResp resp = new BaseDataResp();
-		resp.setCode("0000");
+		resp.setCode("000000");
 		resp.setMessage("成功");
-		resp.setDate(problemMapper.showProblem());
+		resp.setData(problemMapper.showProblem());
 		return resp;
 	}
 	
@@ -29,9 +29,9 @@ public class ProblemController {
 	@ResponseBody
 	public BaseDataResp showProblemDetails(String problemId) {
 		BaseDataResp resp = new BaseDataResp();
-		resp.setCode("0000");
+		resp.setCode("000000");
 		resp.setMessage("成功");
-		resp.setDate(problemMapper.showProblemDetails(problemId));
+		resp.setData(problemMapper.showProblemDetails(problemId));
 		return resp;
 	}
 }

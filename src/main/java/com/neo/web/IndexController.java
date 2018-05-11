@@ -1,11 +1,14 @@
 package com.neo.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neo.entity.BaseDataResp;
+import com.neo.entity.TProduct;
 import com.neo.mapper.IndexMapper;
 
 @Controller
@@ -19,9 +22,15 @@ public class IndexController {
 	@ResponseBody
 	public BaseDataResp showIndex() {
 		BaseDataResp resp = new BaseDataResp();
-		resp.setCode("0000");
+		List<TProduct> list = indexMapper.showIndex();
+		if(list == null) {
+			resp.setCode("000001");
+			resp.setMessage("查询失败");
+			return resp;
+		}
+		resp.setCode("000000");
 		resp.setMessage("成功");
-		resp.setDate(indexMapper.showIndex());
+		resp.setData(list);
 		return resp;
 	}
 	

@@ -42,13 +42,13 @@ public class ArticleController {
 		BaseDataResp resp = new BaseDataResp();
 		List<TArticle> taList=articleMapper.getAllByStatus();
 		if(null == taList){
-			resp.setCode("0001");
+			resp.setCode("000001");
 			resp.setMessage("获取失败");
 			return resp;
 		}else{
-			resp.setCode("0000");
+			resp.setCode("000000");
 			resp.setMessage("获取成功");
-			resp.setDate(taList);
+			resp.setData(taList);
 		}
 		return resp;
 	}
@@ -63,9 +63,9 @@ public class ArticleController {
     public BaseDataResp getArticle(@RequestParam String id) {
     	BaseDataResp resp = new BaseDataResp();
     	TArticle ta=articleMapper.getOne(id);
-    	resp.setCode("0000");
+    	resp.setCode("000000");
 		resp.setMessage("成功");
-		resp.setDate(ta);
+		resp.setData(ta);
         return resp;
     }
     

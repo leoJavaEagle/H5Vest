@@ -8,9 +8,6 @@ public class User implements Serializable{
 	private String id;
 	private String username;
 	private String password;
-	private String userSex;
-	private String nickName;
-	
 	public String getId() {
 		return id;
 	}
@@ -28,18 +25,6 @@ public class User implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getUserSex() {
-		return userSex;
-	}
-	public void setUserSex(String userSex) {
-		this.userSex = userSex;
-	}
-	public String getNickName() {
-		return nickName;
-	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
 	}
 	
 }

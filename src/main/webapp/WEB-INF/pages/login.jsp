@@ -142,12 +142,15 @@
 // 			var date = $("#loginForm").serialize();
 			$.ajax({
 			     url: "/console/checkLogin",
-			     data: {"userName":name,"password":pwd},
+			     data: JSON.stringify({"username":name,"password":pwd}),
 			     type: "POST",
-// 			     contentType: "application/json;charset=utf-8",
+			     contentType: "application/json;charset=utf-8",
 			     success: function(obj){
-			    	 alert("66");
-			    	 window.location.href = "/index/showIndexPage";
+			    	 if(obj.code == "000000") {
+				    	 window.location.href = "/index/showIndexPage";
+			    	 }else {
+			    		 $("#showInfo").text("用户名或密码有误！").css("color", "red");
+			    	 }
 			     }
 			});
 		});

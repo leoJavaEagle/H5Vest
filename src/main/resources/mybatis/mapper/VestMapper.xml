@@ -18,7 +18,7 @@
 	
 	<select id="showModelAndStatus" resultType="com.neo.entity.TModel">
 		SELECT 
-			tm.index ,tm.article, tm.counter, tm.mine, tm.status
+			tm.index, tm.article, tm.counter, tm.mine, tm.status
 		FROM t_model tm
 		WHERE source = #{source} AND market_code = #{marketCode}
 	</select>

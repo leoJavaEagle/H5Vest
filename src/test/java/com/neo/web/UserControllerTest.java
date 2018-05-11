@@ -1,6 +1,6 @@
 package com.neo.web;
 
-
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,14 +16,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.neo.entity.TArticle;
 import com.neo.entity.TModel;
-import com.neo.entity.UserEntity;
+import com.neo.entity.User;
 import com.neo.mapper.ArticleMapper;
 import com.neo.mapper.LoginMapper;
 import com.neo.mapper.VestMapper;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -77,10 +73,10 @@ public class UserControllerTest {
 //    	System.out.println(status);
 	}
     
-//    @Test
+    @Test
     public void test2() {
-    	UserEntity user = loginMapper.userLogin("lisi", "123");
-    	System.out.println(user.getUserSex());
+    	User user = loginMapper.userLogin("lisi", "123");
+    	System.out.println(user.getUsername());
 	}
 
 

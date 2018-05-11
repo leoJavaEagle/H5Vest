@@ -2,12 +2,14 @@ package com.neo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neo.entity.BaseDataResp;
 import com.neo.entity.TModel;
 import com.neo.mapper.VestMapper;
+import com.neo.req.Source;
 
 @Controller
 @RequestMapping("/vest")
@@ -24,21 +26,22 @@ public class VestController {
 	 */
 	@RequestMapping("/auditing")
 	@ResponseBody
-	public BaseDataResp findAuditingStatus(String source, String marketCode) {
+	public BaseDataResp findAuditingStatus(@RequestBody Source util) {
+		System.out.println(util.getSource() + ",  " + util.getMarketCode());
 		BaseDataResp resp = new BaseDataResp();
-		String statusInfo = vestMapper.findAuditingStatus(source, marketCode);
+		String statusInfo = vestMapper.findAuditingStatus(util.getSource(), util.getMarketCode());
 		if(statusInfo == null) {
-			resp.setCode("0002");
+			resp.setCode("000002");
 			resp.setMessage("查询错误！");
 			return resp;
 		}else if("0".equals(statusInfo)) {
-			resp.setCode("0001");
+			resp.setCode("000001");
 			resp.setMessage("审核中");
 		}else {
-			resp.setCode("0000");
+			resp.setCode("000000");
 			resp.setMessage("审核结束");
 		}
-		resp.setDate(statusInfo);
+		resp.setData(statusInfo);
 		return resp;
 	}
 	
@@ -54,13 +57,13 @@ public class VestController {
 		BaseDataResp resp = new BaseDataResp();
 		TModel model = vestMapper.showModel(source, marketCode);
 		if(model == null) {
-			resp.setCode("0001");
+			resp.setCode("000001");
 			resp.setMessage("模板不存在");
 			return resp;
 		}
-		resp.setCode("0000");
+		resp.setCode("000000");
 		resp.setMessage("成功");
-		resp.setDate(model);
+		resp.setData(model);
 		return resp;
 	}
 	
@@ -72,19 +75,20 @@ public class VestController {
 	 */
 	@RequestMapping("/showModelAndStatus")
 	@ResponseBody
-	public BaseDataResp showModelAndStatus(String source, String marketCode) {
+	public BaseDataResp showModelAndStatus(@RequestBody Source util) {
+		System.out.println(util.getSource() + ",1  " + util.getMarketCode());
 		BaseDataResp resp = new BaseDataResp();
-		TModel model = vestMapper.showModelAndStatus(source, marketCode);
+		TModel model = vestMapper.showModelAndStatus(util.getSource(), util.getMarketCode());
 		if(model == null) {
-			resp.setCode("0002");
+			resp.setCode("000002");
 			resp.setMessage("模板不存在");
 			return resp;
 		}else if("0".equals(model.getStatus())){
-			resp.setCode("0001");
+			resp.setCode("000001");
 			resp.setMessage("审核中");
-			resp.setDate(model);
+			resp.setData(model);
 		}else{
-			resp.setCode("0000");
+			resp.setCode("000000");
 			resp.setMessage("审核结束");
 		}
 		return resp;

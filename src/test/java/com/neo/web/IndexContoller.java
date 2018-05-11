@@ -14,7 +14,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.neo.entity.TProblem;
 import com.neo.entity.TProduct;
+import com.neo.entity.User;
 import com.neo.mapper.IndexMapper;
+import com.neo.mapper.LoginMapper;
 import com.neo.mapper.ProblemMapper;
 import com.neo.mapper.VestMapper;
 
@@ -34,6 +36,9 @@ public class IndexContoller {
 	
 	@Autowired
 	private VestMapper vestMapper;
+	
+	@Autowired
+	private LoginMapper loginMapper;
 
     @Before
     public void setUp() throws Exception {
@@ -67,6 +72,12 @@ public class IndexContoller {
 	public void vestTest() {
 		String status = vestMapper.findAuditingStatus("ios", "ios");
 		System.out.println("审核状态 : " + status);
+	}
+	
+	@Test
+	public void checkLogin() {
+		User user = loginMapper.userLogin("lisi", "123");
+		System.out.println(user.getUsername());
 	}
 	
 }
