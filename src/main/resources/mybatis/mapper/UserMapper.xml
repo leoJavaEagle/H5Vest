@@ -10,7 +10,7 @@
     </resultMap>
     
     <sql id="Base_Column_List" >
-        id, userName, passWord, user_sex, nick_name
+        id, userName, passWord
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap"  >
@@ -52,11 +52,11 @@
        		 id =#{id}
     </delete>
     
-    <select id="userLogin" resultType="com.neo.entity.UserEntity">
+    <select id="userLogin" resultType="com.neo.entity.UserEntity" parameterType="java.lang.String">
     	SELECT 
     		<include refid="Base_Column_List" />
     	FROM users 
-    	WHERE username = #{username} AND password = #{password}
+    	WHERE username = #{userName} AND password = #{password}
     </select>
 
 </mapper>

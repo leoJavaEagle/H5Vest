@@ -59,4 +59,9 @@ public class IndexContoller {
 		System.out.println(list.get(0).getContent());
 	}
 	
+	@Test
+	public void vestTest() {
+		
+	}
+	
 }

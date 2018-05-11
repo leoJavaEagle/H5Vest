@@ -15,7 +15,7 @@ public class IndexController {
 	@Autowired
 	private IndexMapper indexMapper;
 
-	@RequestMapping("/index.do")
+	@RequestMapping("/index")
 	@ResponseBody
 	public BaseDataResp showIndex() {
 		BaseDataResp resp = new BaseDataResp();
@@ -23,5 +23,10 @@ public class IndexController {
 		resp.setMessage("成功");
 		resp.setDate(indexMapper.showIndex());
 		return resp;
+	}
+	
+	@RequestMapping("/showIndexPage.do")
+	public String showIndexPage() {
+		return "home";
 	}
 }
