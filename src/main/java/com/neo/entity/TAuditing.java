@@ -1,10 +1,12 @@
 package com.neo.entity;
 
-import org.hibernate.validator.constraints.Length;
+import java.io.Serializable;
 
-public class TAuditing
+public class TAuditing implements Serializable
 {
-    /**
+	private static final long serialVersionUID = -746296776426142698L;
+
+	/**
      * 主键id
      */
     private String id;
