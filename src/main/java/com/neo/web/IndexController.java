@@ -1,14 +1,14 @@
 package com.neo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.neo.entity.BaseDataResp;
 import com.neo.mapper.IndexMapper;
 
-@RestController
+@Controller
 @RequestMapping("/index")
 public class IndexController {
 	
@@ -25,7 +25,7 @@ public class IndexController {
 		return resp;
 	}
 	
-	@RequestMapping("/showIndexPage.do")
+	@RequestMapping("/showIndexPage")
 	public String showIndexPage() {
 		return "home";
 	}

@@ -75,7 +75,17 @@ public class TProduct implements Serializable
     /**
      * 月利率
      */
+    private String dayRate;
+    
+    /**
+     * 月利率
+     */
     private String monthRate;
+    
+    /**
+     * 月利率
+     */
+    private String yearhRate;
     
     /**
      * 借款期限（1-30天；6个月；12个月；18个月）
@@ -144,8 +154,34 @@ public class TProduct implements Serializable
      */
     private String isDefault;
     
+    /**
+     * 小logo图片
+     */
+    private String logoTip;
     
-    public String getId()
+    /**
+     * 小logo右边的产品提示
+     */
+    private String productTip;
+    
+    
+    public String getLogoTip() {
+		return logoTip;
+	}
+
+	public void setLogoTip(String logoTip) {
+		this.logoTip = logoTip;
+	}
+
+	public String getProductTip() {
+		return productTip;
+	}
+
+	public void setProductTip(String productTip) {
+		this.productTip = productTip;
+	}
+
+	public String getId()
     {
         return id;
     }
@@ -401,7 +437,23 @@ public class TProduct implements Serializable
         return monthRate;
     }
     
-    public void setMonthRate(String monthRate)
+    public String getDayRate() {
+		return dayRate;
+	}
+
+	public void setDayRate(String dayRate) {
+		this.dayRate = dayRate;
+	}
+
+	public String getYearhRate() {
+		return yearhRate;
+	}
+
+	public void setYearhRate(String yearhRate) {
+		this.yearhRate = yearhRate;
+	}
+
+	public void setMonthRate(String monthRate)
     {
         this.monthRate = monthRate;
     }

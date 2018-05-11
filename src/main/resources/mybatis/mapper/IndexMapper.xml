@@ -31,7 +31,11 @@
 			property="productPictureUrl" jdbcType="VARCHAR" />
 		<result column="product_overview" property="productOverview"
 			jdbcType="VARCHAR" />
-		<result column="month_rate" property="monthRate"
+			<result column="day_rate" property="dayRate"
+			jdbcType="DECIMAL" />
+			<result column="month_rate" property="monthRate"
+			jdbcType="DECIMAL" />
+		<result column="year_rate" property="yearRate"
 			jdbcType="DECIMAL" />
 		<result column="borrow_periods" property="borrowPeriods"
 			jdbcType="VARCHAR" />
@@ -52,6 +56,8 @@
 			jdbcType="TIMESTAMP" />
 		<result column="is_default" property="isDefault"
 			jdbcType="VARCHAR" />
+		<result column="logo_tip" property="logoTip" jdbcType="VARCHAR" />
+		<result column="product_tip" property="productTip" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="TProduct_Column">
@@ -59,9 +65,10 @@
 		repayment_types,
 		borrow_fee_rate, is_weiyuejin, weiyuejin_rate, service_fee_setting,
 		overdue_fee_setting,
-		product_picture_url, product_overview, month_rate, borrow_periods, product_process_name,
-		product_process_id, card_template_id, status, create_id, create_time,
-		update_id,update_time,amount_limit,url,biz_time,is_default
+		product_picture_url, product_overview, day_rate, month_rate, year_rate,
+		borrow_periods, product_process_name, product_process_id, card_template_id,
+		status, create_id, create_time,update_id, update_time, amount_limit,
+		url,biz_time,is_default,logo_tip,product_tip
 	</sql>
 	<select id="showIndex" resultMap="TProductMap">
 		SELECT 

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}"></c:set>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>login</title>
 <link type="text/css" rel="stylesheet"
 	href="${basePath}/loanCss/bootstrap.css">
@@ -30,7 +31,7 @@
 				<div class="login-module">
 					<div class="alibaba-login-iframe">
 						<span id="showInfo"></span>
-						<form method="get" id="loginForm" action="/console/checkLogin">
+						<form method="post" id="loginForm">
 							<input type="hidden" id="codeStatus" value="${codeStatus }">
 							<div id="login-content" class="form clearfix">
 								<!--用户名-->
@@ -77,7 +78,7 @@
 
 							<!--登录按钮-->
 							<div class="login-submit">
-								<input type="submit" value="登录" class="fm-button fm-submit" id="loginSubmit" name="submit-btn">
+								<input type="button" onclick="userLogin()" value="登录" class="fm-button fm-submit" id="loginSubmit" name="submit-btn">
 							</div>
 						</form>
 					</div>
@@ -90,32 +91,66 @@
 	<div class="login-foot"></div>
 	<script type="text/javascript" src="${basePath}/js/common/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
-// 		$("#loginSubmit").click(function() {
-// 			debugger;
-// 			$("#showInfo").text("");
-// 			var url = "/console/checkLogin";
-// 			var data = $("#loginForm").serialize();
-// 			alert(data)
-// 			$.ajax({
-// 				url:url,
-// 				headers: {
-//                     'Accept':'application/json',
-//                     'Content-Type':'application/x-www-form-urlencoded'
-//                 },
-//                 data:data,
-//                 success:function(obj) {
-//                 	alert("23456");
-//                 }
-// 			});
-// 			$.post(url, data, function(obj) {
-// 				alert("456");
-// 				if(obj.getCode == "0000") {
-// 					window.location.href = "/index/showIndexPage";
-// 				}else {
-// 					$("#showInfo").text("用户名或密码有误！").css("color", "red");
-// 				}
-// 			});
-// 		});
+// 		function $(id) {
+// 	        return document.getElementById(id);
+// 	    }
+	
+	    function getXMLHttpRequest() {
+	        var xmlhttp = null;
+	        //如果有XMLHttpRequest，那就是非IE6浏览器
+	        if (window.XMLHttpRequest) {
+	            xmlhttp = new XMLHttpRequest();
+	        } else {
+	        	//IE6浏览器创建ajax对象
+	            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	        }
+	        return xmlhttp;
+	    }
+	
+	    function userLogins() {
+// 	    	debugger;
+	        // 获取XMLHttpRequest
+	        var xmlhttp = getXMLHttpRequest();
+	        // 设计响应函数
+	        xmlhttp.onreadystatechange = function() {
+	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	                // 获取响应的正文文本
+	                var text = xmlhttp.responseText;
+	                // 将响应的正文文本转换为JSON对象
+	                var jsonObject = JSON.parse(text);
+	                // 判断JSON对象中的state是否正确
+	                if (jsonObject.state == "0000") {
+		            	window.location.href = "/index/showIndexPage";
+	                }
+	            }
+	        };
+	        // 发出请求
+// 			var username = $("txUserId").value;
+// 			var password = $("passwordId").value;
+// 	        var url = "/console/checkLogin?userName=" + username;
+// 	        var data = $("#loginForm").serialize();
+// 			alert(username + ", " + password);
+			var url = "/console/checkLogin";
+	        xmlhttp.open("get", url, true);
+	        xmlhttp.send();
+	    }
+	
+		$("#loginSubmit").click(function() {
+			$("#showInfo").text("");
+			var name = $("#txUserId").val();
+			var pwd = $("#passwordId").val();
+// 			var date = $("#loginForm").serialize();
+			$.ajax({
+			     url: "/console/checkLogin",
+			     data: {"userName":name,"password":pwd},
+			     type: "POST",
+// 			     contentType: "application/json;charset=utf-8",
+			     success: function(obj){
+			    	 alert("66");
+			    	 window.location.href = "/index/showIndexPage";
+			     }
+			});
+		});
 	</script>
 </body>
 </html>

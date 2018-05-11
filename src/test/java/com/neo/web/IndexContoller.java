@@ -16,6 +16,7 @@ import com.neo.entity.TProblem;
 import com.neo.entity.TProduct;
 import com.neo.mapper.IndexMapper;
 import com.neo.mapper.ProblemMapper;
+import com.neo.mapper.VestMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,6 +31,9 @@ public class IndexContoller {
 	
 	@Autowired
 	private ProblemMapper problemMapper;
+	
+	@Autowired
+	private VestMapper vestMapper;
 
     @Before
     public void setUp() throws Exception {
@@ -61,7 +65,8 @@ public class IndexContoller {
 	
 	@Test
 	public void vestTest() {
-		
+		String status = vestMapper.findAuditingStatus("ios", "ios");
+		System.out.println("审核状态 : " + status);
 	}
 	
 }

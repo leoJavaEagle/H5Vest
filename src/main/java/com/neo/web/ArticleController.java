@@ -3,14 +3,14 @@ package com.neo.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.neo.entity.TArticle;
 import com.neo.mapper.ArticleMapper;
 
-@RestController
+@Controller
 public class ArticleController {
 	
 	@Autowired
@@ -82,6 +82,5 @@ public class ArticleController {
     public void delete(@PathVariable("id") String id) {
     	articleMapper.delete(id);
     }
-    
     
 }

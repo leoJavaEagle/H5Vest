@@ -15,7 +15,7 @@ public class ProblemController {
 	@Autowired
 	private ProblemMapper problemMapper;
 	
-	@RequestMapping("/problem.do")
+	@RequestMapping("/problem")
 	@ResponseBody
 	public BaseDataResp showProblem() {
 		BaseDataResp resp = new BaseDataResp();
@@ -25,7 +25,7 @@ public class ProblemController {
 		return resp;
 	}
 	
-	@RequestMapping("/problem/details.do")
+	@RequestMapping("/problem/details")
 	@ResponseBody
 	public BaseDataResp showProblemDetails(String problemId) {
 		BaseDataResp resp = new BaseDataResp();

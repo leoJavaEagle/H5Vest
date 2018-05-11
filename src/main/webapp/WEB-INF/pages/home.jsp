@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>index</title>
+<title>welcome</title>
 </head>
 <body>
 	<h1>欢迎来到品舒后台管理系统</h1>

@@ -22,7 +22,7 @@ public class VestController {
 	 * @param marketCode
 	 * @return
 	 */
-	@RequestMapping("/auditing.do")
+	@RequestMapping("/auditing")
 	@ResponseBody
 	public BaseDataResp findAuditingStatus(String source, String marketCode) {
 		BaseDataResp resp = new BaseDataResp();
@@ -34,6 +34,10 @@ public class VestController {
 		}else if("0".equals(statusInfo)) {
 			resp.setCode("0002");
 			resp.setMessage("审核中");
+			BaseDataResp re = showModel(source, marketCode);
+			if("0000".equals(re.getCode())) {
+				resp.setDate(re.getDate());
+			}
 		}else {
 			resp.setCode("0000");
 			resp.setMessage("审核通过");
@@ -44,12 +48,7 @@ public class VestController {
 	
 	/**
 	 * 状态为审核中，显示模板
-	 * @param source
-	 * @param marketCode
-	 * @return
 	 */
-	@RequestMapping("/showModel.do")
-	@ResponseBody
 	public BaseDataResp showModel(String source, String marketCode) {
 		BaseDataResp resp = new BaseDataResp();
 		TModel model = vestMapper.showModel(source, marketCode);
