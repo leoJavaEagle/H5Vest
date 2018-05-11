@@ -3,14 +3,17 @@ package com.neo.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.neo.entity.BaseDataResp;
 import com.neo.entity.TArticle;
 import com.neo.mapper.ArticleMapper;
 
-@RestController
+@Controller
 public class ArticleController {
 	
 	@Autowired
@@ -21,19 +24,31 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping("/getArticles")
-	public List<TArticle> getArticles() {
-		List<TArticle> ta=articleMapper.getAll();
-		return ta;
+	public Object getArticles() {
+		ModelAndView mv = new ModelAndView();
+		List<TArticle> taList=articleMapper.getAll();
+		mv.addObject("list", taList);
+		return mv;
 	}
 	
 	/**
-	 * 获取所有状态为显示的资讯文章
+	 * 获取所有状态为显示的资讯文章--前台显示接口
 	 * @return
 	 */
 	@RequestMapping("/getArticlesByStatus")
-	public List<TArticle> getArticlesByStatus() {
-		List<TArticle> ta=articleMapper.getAllByStatus();
-		return ta;
+	public BaseDataResp getArticlesByStatus() {
+		BaseDataResp resp = new BaseDataResp();
+		List<TArticle> taList=articleMapper.getAllByStatus();
+		if(null == taList){
+			resp.setCode("0001");
+			resp.setMessage("获取失败");
+			return resp;
+		}else{
+			resp.setCode("0000");
+			resp.setMessage("获取成功");
+			resp.setDate(taList);
+		}
+		return resp;
 	}
 	
 	/**
@@ -42,9 +57,13 @@ public class ArticleController {
 	 * @return
 	 */
     @RequestMapping("/getArticle")
-    public TArticle getArticle(String id) {
+    public BaseDataResp getArticle(@RequestParam String id) {
+    	BaseDataResp resp = new BaseDataResp();
     	TArticle ta=articleMapper.getOne(id);
-        return ta;
+    	resp.setCode("0000");
+		resp.setMessage("成功");
+		resp.setDate(ta);
+        return resp;
     }
     
     /**
