@@ -15,7 +15,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.neo.entity.TArticle;
+import com.neo.entity.TModel;
+import com.neo.entity.UserEntity;
 import com.neo.mapper.ArticleMapper;
+import com.neo.mapper.LoginMapper;
+import com.neo.mapper.VestMapper;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -29,6 +33,10 @@ public class UserControllerTest {
     private MockMvc mockMvc;
     
     @Autowired
+    VestMapper vestMapper;
+    @Autowired
+    LoginMapper loginMapper;
+    @Autowired
     ArticleMapper articleMapper;
 
     @Before
@@ -36,21 +44,28 @@ public class UserControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build(); //初始化MockMvc对象
     }
 
-    @Test
+//    @Test
     public void getUsers() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/getUsers")
                 .accept(MediaType.APPLICATION_JSON_UTF8)).andDo(print());
     }
     
     @Test
-    public void getArticles() {
-		List<TArticle> ta=articleMapper.getAllByStatus();
-		for (TArticle tArticle : ta) {
-			System.out.println(tArticle.getTitle());
-			System.out.println(tArticle.getContent());
-			System.out.println(tArticle.getCreateTime());
-			System.out.println();
-		}
+    public void test() {
+    	TArticle ta=articleMapper.getOne("1");
+    	System.out.println(ta.getContent());
+	}
+    
+    @Test
+    public void test1() {
+    	TModel model = vestMapper.showModel("ios", "ios");
+    	System.out.println(model.getMarketCode());
+	}
+    
+    @Test
+    public void test2() {
+    	UserEntity user = loginMapper.userLogin("lisi", "123");
+    	System.out.println(user.getUserSex());
 	}
 
 
