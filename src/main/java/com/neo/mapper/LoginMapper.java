@@ -6,5 +6,5 @@ import com.neo.entity.UserEntity;
 
 public interface LoginMapper {
 
-	UserEntity userLogin(@Param("userName") String userName, @Param("password") String password);
+	UserEntity userLogin(@Param("userName")String userName, @Param("password")String password);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.neo.entity.BaseDataResp;
@@ -35,6 +36,7 @@ public class ArticleController {
 	 * 获取所有状态为显示的资讯文章--前台显示接口
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/getArticlesByStatus")
 	public BaseDataResp getArticlesByStatus() {
 		BaseDataResp resp = new BaseDataResp();
@@ -56,6 +58,7 @@ public class ArticleController {
 	 * @param id
 	 * @return
 	 */
+	@ResponseBody
     @RequestMapping("/getArticle")
     public BaseDataResp getArticle(@RequestParam String id) {
     	BaseDataResp resp = new BaseDataResp();

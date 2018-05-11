@@ -22,33 +22,33 @@ public class VestController {
 	 * @param marketCode
 	 * @return
 	 */
-	@RequestMapping("/auditing.do")
+	@RequestMapping("/auditing")
 	@ResponseBody
 	public BaseDataResp findAuditingStatus(String source, String marketCode) {
 		BaseDataResp resp = new BaseDataResp();
 		String statusInfo = vestMapper.findAuditingStatus(source, marketCode);
 		if(statusInfo == null) {
-			resp.setCode("0001");
+			resp.setCode("0002");
 			resp.setMessage("查询错误！");
 			return resp;
 		}else if("0".equals(statusInfo)) {
-			resp.setCode("0002");
+			resp.setCode("0001");
 			resp.setMessage("审核中");
 		}else {
 			resp.setCode("0000");
-			resp.setMessage("审核通过");
+			resp.setMessage("审核结束");
 		}
 		resp.setDate(statusInfo);
 		return resp;
 	}
 	
 	/**
-	 * 状态为审核中，显示模板
+	 * 状态为审核中，显示模块
 	 * @param source
 	 * @param marketCode
 	 * @return
 	 */
-	@RequestMapping("/showModel.do")
+	@RequestMapping("/showModel")
 	@ResponseBody
 	public BaseDataResp showModel(String source, String marketCode) {
 		BaseDataResp resp = new BaseDataResp();
@@ -61,6 +61,32 @@ public class VestController {
 		resp.setCode("0000");
 		resp.setMessage("成功");
 		resp.setDate(model);
+		return resp;
+	}
+	
+	/**
+	 * 查询模块和状态
+	 * @param source
+	 * @param marketCode
+	 * @return
+	 */
+	@RequestMapping("/showModelAndStatus")
+	@ResponseBody
+	public BaseDataResp showModelAndStatus(String source, String marketCode) {
+		BaseDataResp resp = new BaseDataResp();
+		TModel model = vestMapper.showModelAndStatus(source, marketCode);
+		if(model == null) {
+			resp.setCode("0002");
+			resp.setMessage("模板不存在");
+			return resp;
+		}else if("0".equals(model.getStatus())){
+			resp.setCode("0001");
+			resp.setMessage("审核中");
+			resp.setDate(model);
+		}else{
+			resp.setCode("0000");
+			resp.setMessage("审核结束");
+		}
 		return resp;
 	}
 	

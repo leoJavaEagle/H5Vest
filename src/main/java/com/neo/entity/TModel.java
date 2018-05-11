@@ -17,9 +17,14 @@ public class TModel implements Serializable
     private String source;
     
     /**
-     * 渠道码
+     * 渠道商标识码
      */
     private String marketCode;
+    
+    /**
+     * 渠道码
+     */
+    private String marketName;
     
     /**
      * 首页
@@ -42,7 +47,33 @@ public class TModel implements Serializable
     private String mine;
     
     /**
-     * 状态：0 显示  1 不显示
+     * 审核开始时间
+     */
+    private String startTime;
+    
+    public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	/**
+     * 审核结束时间 
+     */
+    private String endTime;
+    
+    /**
+     * 状态：0 审核中  1 审核结束
      */
     private String status;
 
@@ -108,6 +139,14 @@ public class TModel implements Serializable
 
 	public void setMarketCode(String marketCode) {
 		this.marketCode = marketCode;
+	}
+
+	public String getMarketName() {
+		return marketName;
+	}
+
+	public void setMarketName(String marketName) {
+		this.marketName = marketName;
 	}
     
 }

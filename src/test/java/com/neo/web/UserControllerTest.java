@@ -50,7 +50,7 @@ public class UserControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8)).andDo(print());
     }
     
-    @Test
+//    @Test
     public void test() {
     	TArticle ta=articleMapper.getOne("1");
     	System.out.println(ta.getContent());
@@ -59,10 +59,25 @@ public class UserControllerTest {
     @Test
     public void test1() {
     	TModel model = vestMapper.showModel("ios", "ios");
-    	System.out.println(model.getMarketCode());
+    	if(model==null){
+    		System.out.println("sql出错");
+    	}else{
+    		System.out.println(model.getIndex()+" , "+model.getArticle()+" , "+model.getCounter()+" , "+model.getMine());
+    	}
+    	
+    	TModel model1 = vestMapper.showModelAndStatus("android", "QDVVVVHW20180131102552786");
+    	if(model1==null){
+    		System.out.println("sql出错");
+    	}else{
+    		System.out.println(model1.getIndex()+" , "+model1.getArticle()+" , "+model1.getCounter()+" , "+model1.getMine()
+    		+" , "+model1.getStatus());
+    	}
+    	
+//    	String status = vestMapper.findAuditingStatus("ios", "ios");
+//    	System.out.println(status);
 	}
     
-    @Test
+//    @Test
     public void test2() {
     	UserEntity user = loginMapper.userLogin("lisi", "123");
     	System.out.println(user.getUserSex());
