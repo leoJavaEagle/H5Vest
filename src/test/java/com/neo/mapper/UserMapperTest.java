@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.neo.entity.UserEntity;
-import com.neo.enums.UserSexEnum;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,9 +20,9 @@ public class UserMapperTest {
 
 	@Test
 	public void testInsert() throws Exception {
-		UserMapper.insert(new UserEntity("aa", "a123456", UserSexEnum.MAN));
-		UserMapper.insert(new UserEntity("bb", "b123456", UserSexEnum.WOMAN));
-		UserMapper.insert(new UserEntity("cc", "b123456", UserSexEnum.WOMAN));
+//		UserMapper.insert(new UserEntity("aa", "a123456", UserSexEnum.MAN));
+//		UserMapper.insert(new UserEntity("bb", "b123456", UserSexEnum.WOMAN));
+//		UserMapper.insert(new UserEntity("cc", "b123456", UserSexEnum.WOMAN));
 
 		Assert.assertEquals(3, UserMapper.getAll().size());
 	}

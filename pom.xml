@@ -68,6 +68,12 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<!-- spring boot tomcat jsp 支持开启 -->  
+        <dependency>  
+            <groupId>org.apache.tomcat.embed</groupId>  
+            <artifactId>tomcat-embed-jasper</artifactId>  
+        </dependency> 
+        
 	</dependencies>
 
 	<build>
@@ -90,6 +96,12 @@
 					<include>bootstrap.properties</include>
 				</includes>
 			</resource>
+			<resource>
+          <directory>src/main/resources</directory>
+          <includes>
+              <include>**/*.xml</include>
+          </includes>
+     </resource>
 		</resources>
 		<plugins>
 			<plugin>

@@ -2,17 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.neo.mapper.VestMapper">
 	
-	<select id="findAuditingStatus" resultType="string" parameterType="java.lang.String">
+	<select id="findAuditingStatus" resultType="String">
 		SELECT 
 			status 
-		FROM t_auditing 
+		FROM t_model 
 		WHERE source = #{source} AND market_code = #{marketCode}
 	</select>
 	
 	<select id="showModel" resultType="com.neo.entity.TModel">
 		SELECT 
-			index, article, counter, mine 
-		FROM t_model 
+			tm.index ,tm.article, tm.counter, tm.mine
+		FROM t_model tm
+		WHERE source = #{source} AND market_code = #{marketCode}
+	</select>
+	
+	<select id="showModelAndStatus" resultType="com.neo.entity.TModel">
+		SELECT 
+			tm.index ,tm.article, tm.counter, tm.mine, tm.status
+		FROM t_model tm
 		WHERE source = #{source} AND market_code = #{marketCode}
 	</select>
 
