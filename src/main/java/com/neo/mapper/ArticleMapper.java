@@ -2,6 +2,8 @@ package com.neo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.neo.entity.TArticle;
 
 
@@ -30,24 +32,24 @@ public interface ArticleMapper {
 	 * 插入一条资讯
 	 * @param ta
 	 */
-	void insert(TArticle ta);
+	Integer insert(TArticle ta);
 	
 	/**
 	 * 更新全部资讯
 	 * @param ta
 	 */
-	void update(TArticle ta);
+	Integer update(TArticle ta);
 	
 	/**
 	 * 更新资讯状态
 	 * @param ta
 	 */
-	void updateStatus(TArticle ta);
+	Integer updateStatus(TArticle ta);
 	
 	/**
 	 * 删除一条资讯
 	 * @param id
 	 */
-	void delete(String id);
+	Integer delete(@Param(value = "id") String id);
 
 }

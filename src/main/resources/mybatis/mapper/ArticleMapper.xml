@@ -18,7 +18,8 @@
     <select id="getAll" resultMap="BaseResultMap"  >
        SELECT 
        <include refid="Base_Column_List" />
-	   FROM t_article
+	   FROM t_article 
+	   ORDER BY id ASC
     </select>
     
     <select id="getAllByStatus" resultMap="BaseResultMap"  >
@@ -26,7 +27,7 @@
        <include refid="Base_Column_List" />
 	   FROM t_article
 	   WHERE status = '0'
-	   ORDER BY create_time DESC
+	   ORDER BY create_time ASC
     </select>
 
     <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap" >
@@ -39,23 +40,23 @@
     <insert id="insert" parameterType="com.neo.entity.TArticle" >
        INSERT INTO 
        		t_article
-       		(title,content,read_count,image,create_time,status) 
+       		(id,title,content,read_count,image,create_time,status) 
        	VALUES
-       		(#{title},#{content},#{readCount},#{image},NOW(),#{status})
+       		(FLOOR( 500 + RAND() * (1000 - 500)),#{title,jdbcType=VARCHAR},#{content},#{readCount},#{image},NOW(),#{status})
     </insert>
     
     <update id="update" parameterType="com.neo.entity.TArticle" >
        UPDATE 
-       		t_article 
+       		t_article ta
        SET 
-       	title = #{title},
-       	content = #{content},
-       	read_count = #{readCount},
-       	image = #{image},
-       	status = #{status}
+       	ta.title = #{title,jdbcType=VARCHAR},
+       	ta.content = #{content},
+       	ta.read_count = #{readCount},
+       	ta.status = #{status}
        WHERE 
-       		id = #{id}
+       		ta.id = #{id}
     </update>
+   
     
     <update id="updateStatus" parameterType="com.neo.entity.TArticle" >
        UPDATE 

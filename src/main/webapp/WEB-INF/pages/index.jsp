@@ -72,8 +72,8 @@
       <!-- 此位置放置具体页面的位置 -->
       <div class="modal-body"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary ok">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary ok">提交</button>
       </div>
     </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

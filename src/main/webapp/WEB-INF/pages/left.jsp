@@ -16,7 +16,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a id="load-product-id" href="#"><i class="fa fa-circle-o"></i>产品管理</a></li>
-            <li><a id="load-team-id" href="#"><i class="fa fa-circle-o"></i>资讯管理</a></li>
+            <li><a id="load-article-id" href="#"><i class="fa fa-circle-o"></i>资讯管理</a></li>
             <li><a id="load-problem-id" href="#"><i class="fa fa-circle-o"></i>常见问题</a></li>
             <li><a id="load-model-id" href="#"><i class="fa fa-circle-o"></i>模块管理</a></li>
           </ul>
@@ -46,8 +46,8 @@ $('#load-product-id').click(function(){
 	var url="showProduct?t="+Math.random(1000);
 	$(".content").load(url);
 })
-$('#load-team-id').click(function(){
-	var url="?t="+Math.random(1000);
+$('#load-article-id').click(function(){
+	var url="showArticle?t="+Math.random(1000);
 	$(".content").load(url);
 })
 $('#load-problem-id').click(function(){
@@ -55,7 +55,7 @@ $('#load-problem-id').click(function(){
 	$(".content").load(url);
 })
 $('#load-model-id').click(function(){
-	var url="?t="+Math.random(1000);
+	var url="showModel?t="+Math.random(1000);
 	$(".content").load(url);
 })
 </script>

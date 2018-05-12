@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.neo.entity.BaseDataResp;
+import com.neo.entity.TArticle;
 import com.neo.entity.TProduct;
+import com.neo.mapper.ArticleMapper;
 import com.neo.mapper.IndexMapper;
 
 @Controller
@@ -17,6 +20,8 @@ public class IndexController {
 	
 	@Autowired
 	private IndexMapper indexMapper;
+	@Autowired
+	private ArticleMapper articleMapper;
 
 	@RequestMapping("/index")
 	@ResponseBody
@@ -43,4 +48,25 @@ public class IndexController {
 	public String showProduct() {
 		return "product/project_list";
 	}
+	
+	/**
+	 * 获取所有资讯文章
+	 * @return
+	 */
+	@RequestMapping("/showArticle")
+	public ModelAndView getArticles() {
+		ModelAndView mv = new ModelAndView("article/article_list");
+		return mv;
+	}
+	
+	/**
+	 * 获取
+	 * @return
+	 */
+	@RequestMapping("/showModel")
+	public ModelAndView getModel() {
+		ModelAndView mv = new ModelAndView("model/model_list");
+		return mv;
+	}
+	
 }

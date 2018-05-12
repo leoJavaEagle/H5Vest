@@ -2,6 +2,8 @@ package com.neo.web;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +22,8 @@ import com.neo.entity.User;
 import com.neo.mapper.ArticleMapper;
 import com.neo.mapper.LoginMapper;
 import com.neo.mapper.VestMapper;
+
+import jason.stdlib.foreach;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -46,10 +50,12 @@ public class UserControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8)).andDo(print());
     }
     
-//    @Test
+    @Test
     public void test() {
-    	TArticle ta=articleMapper.getOne("1");
-    	System.out.println(ta.getContent());
+    	List<TArticle> ta=articleMapper.getAll();
+    	for (TArticle tArticle : ta) {
+			System.out.println(tArticle.getTitle());
+		}
 	}
     
     @Test

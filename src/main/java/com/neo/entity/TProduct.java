@@ -137,7 +137,7 @@ public class TProduct implements Serializable
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
     
     /**
      * 修改人
@@ -362,17 +362,17 @@ public class TProduct implements Serializable
         this.createId = createId == null ? null : createId.trim();
     }
     
-    public Date getCreateTime()
-    {
-        return createTime;
-    }
     
-    public void setCreateTime(Date createTime)
-    {
-        this.createTime = createTime;
-    }
     
-    public String getUpdateId()
+    public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getUpdateId()
     {
         return updateId;
     }
