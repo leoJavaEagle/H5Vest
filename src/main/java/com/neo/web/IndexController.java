@@ -36,6 +36,11 @@ public class IndexController {
 	
 	@RequestMapping("/showIndexPage")
 	public String showIndexPage() {
-		return "home";
+		return "index";
+	}
+	
+	@RequestMapping("/showProduct")
+	public String showProduct() {
+		return "product/project_list";
 	}
 }

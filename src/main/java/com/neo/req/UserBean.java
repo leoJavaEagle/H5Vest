@@ -5,13 +5,14 @@ import java.io.Serializable;
 public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 3263266252842248137L;
-	private String userName;
+	private String username;
 	private String password;
+	
 	public String getUsername() {
-		return userName;
+		return username;
 	}
-	public void setUsername(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
