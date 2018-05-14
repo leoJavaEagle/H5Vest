@@ -42,7 +42,7 @@
        tm.id,tm.source,tm.market_code,tm.market_name,tm.index,tm.article,
        tm.counter,tm.mine,tm.start_time,tm.end_time,tm.status
 	   FROM t_model tm
-	   ORDER BY tm.end_time DESC
+	   ORDER BY tm.status ASC, tm.end_time ASC
     </select>
 	
 	<select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap">

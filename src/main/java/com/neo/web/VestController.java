@@ -57,16 +57,16 @@ public class VestController {
 	 */
 	@RequestMapping("/showModel")
 	@ResponseBody
-	public BaseDataResp showModel(String source, String marketCode) {
+	public BaseDataResp showModel(@RequestBody Source util) {
 		BaseDataResp resp = new BaseDataResp();
-		TModel model = vestMapper.showModel(source, marketCode);
+		TModel model = vestMapper.showModel(util.getSource(), util.getMarketCode());
 		if(model == null) {
 			resp.setCode("000001");
 			resp.setMessage("模板不存在");
 			return resp;
 		}
 		resp.setCode("000000");
-		resp.setMessage("成功");
+		resp.setMessage("查询成功");
 		resp.setData(model);
 		return resp;
 	}
@@ -80,7 +80,7 @@ public class VestController {
 	@RequestMapping("/showModelAndStatus")
 	@ResponseBody
 	public BaseDataResp showModelAndStatus(@RequestBody Source util) {
-		System.out.println(util.getSource() + ",1  " + util.getMarketCode());
+//		System.out.println(util.getSource() + ",1  " + util.getMarketCode());
 		BaseDataResp resp = new BaseDataResp();
 		TModel model = vestMapper.showModelAndStatus(util.getSource(), util.getMarketCode());
 		if(model == null) {

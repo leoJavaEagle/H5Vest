@@ -11,19 +11,22 @@
 
 	<name>spring-boot-mybatis-xml</name>
 	<description>Demo project for Spring Boot and mybatis</description>
-
+	
+	<!-- 引入父项目 -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.9.RELEASE</version>
 		<relativePath />
 	</parent>
-
+	
+	<!-- 参数设置 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 	</properties>
-
+	
+	<!-- jar包依赖 -->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -67,6 +70,30 @@
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
+		
+		<!-- dbcp 连接池引入 -->
+
+        <dependency>
+
+            <groupId>commons-dbcp</groupId>
+
+            <artifactId>commons-dbcp</artifactId>
+
+            <version>1.4</version>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>commons-pool</groupId>
+
+            <artifactId>commons-pool</artifactId>
+
+            <version>1.4</version>
+
+        </dependency>
+		<!-- dbcp 连接池引入 end -->
+		
 		<dependency>
 			<groupId>net.sf.jason</groupId>
 			<artifactId>jason</artifactId>
