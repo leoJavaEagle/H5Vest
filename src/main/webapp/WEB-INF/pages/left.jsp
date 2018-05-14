@@ -47,15 +47,15 @@ $('#load-product-id').click(function(){
 	$(".content").load(url);
 })
 $('#load-team-id').click(function(){
-	var url="?t="+Math.random(1000);
+	
 	$(".content").load(url);
 })
 $('#load-problem-id').click(function(){
-	var url="?t="+Math.random(1000);
+	var url = "showProblem?t="+Math.random(1000);
 	$(".content").load(url);
 })
 $('#load-model-id').click(function(){
-	var url="?t="+Math.random(1000);
+	
 	$(".content").load(url);
 })
 </script>

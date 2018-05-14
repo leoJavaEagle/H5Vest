@@ -25,7 +25,7 @@ public class ProblemController {
 		return resp;
 	}
 	
-	@RequestMapping("/problem/details")
+	@RequestMapping("/problemDetails")
 	@ResponseBody
 	public BaseDataResp showProblemDetails(String problemId) {
 		BaseDataResp resp = new BaseDataResp();

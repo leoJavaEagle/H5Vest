@@ -1,7 +1,6 @@
 package com.neo.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class TProblem implements Serializable {
 
@@ -9,7 +8,8 @@ public class TProblem implements Serializable {
 	private String id;
 	private String title;
 	private String content;
-	private Date createTime;
+	private String createTime;
+	private String updateTime;
 	private String status;
 	public String getId() {
 		return id;
@@ -29,11 +29,17 @@ public class TProblem implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 	public String getStatus() {
 		return status;
@@ -45,33 +51,9 @@ public class TProblem implements Serializable {
 		return serialVersionUID;
 	}
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TProblem other = (TProblem) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		return true;
+	public String toString() {
+		return "TProblem [id=" + id + ", title=" + title + ", content=" + content + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + ", status=" + status + "]";
 	}
 	
 }

@@ -7,69 +7,298 @@
 			jdbcType="CHAR" />
 		<result column="product_name" property="productName"
 			jdbcType="VARCHAR" />
-		<result column="url" property="url" jdbcType="VARCHAR" />
-		<result column="amount_limit" property="amountLimit"
-			jdbcType="VARCHAR" />
-		<result column="biz_time" property="bizTime" jdbcType="VARCHAR" />
-		<result column="apply_money_start" property="applyMoneyStart"
-			jdbcType="DECIMAL" />
-		<result column="apply_money_end" property="applyMoneyEnd"
-			jdbcType="DECIMAL" />
-		<result column="repayment_types" property="repaymentTypes"
-			jdbcType="VARCHAR" />
-		<result column="borrow_fee_rate" property="borrowFeeRate"
-			jdbcType="DECIMAL" />
-		<result column="is_weiyuejin" property="isWeiyuejin"
-			jdbcType="CHAR" />
-		<result column="weiyuejin_rate" property="weiyuejinRate"
-			jdbcType="DECIMAL" />
-		<result column="service_fee_setting"
-			property="serviceFeeSetting" jdbcType="CHAR" />
-		<result column="overdue_fee_setting"
-			property="overdueFeeSetting" jdbcType="CHAR" />
 		<result column="product_picture_url"
 			property="productPictureUrl" jdbcType="VARCHAR" />
-		<result column="product_overview" property="productOverview"
-			jdbcType="VARCHAR" />
-			<result column="day_rate" property="dayRate"
+		<result column="day_rate" property="dayRate"
 			jdbcType="DECIMAL" />
-			<result column="month_rate" property="monthRate"
+		<result column="month_rate" property="monthRate"
 			jdbcType="DECIMAL" />
 		<result column="year_rate" property="yearRate"
 			jdbcType="DECIMAL" />
 		<result column="borrow_periods" property="borrowPeriods"
 			jdbcType="VARCHAR" />
-		<result column="product_process_name"
-			property="productProcessName" jdbcType="VARCHAR" />
-		<result column="product_process_id" property="productProcessId"
-			jdbcType="VARCHAR" />
-		<result column="card_template_id" property="cardTemplateId"
-			jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="CHAR" />
-		<result column="create_id" property="createId"
-			jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime"
 			jdbcType="TIMESTAMP" />
-		<result column="update_id" property="updateId"
-			jdbcType="VARCHAR" />
 		<result column="update_time" property="updateTime"
 			jdbcType="TIMESTAMP" />
-		<result column="is_default" property="isDefault"
+		<result column="out_url" property="outUrl" jdbcType="VARCHAR" />
+		<result column="amount_limit" property="amountLimit"
 			jdbcType="VARCHAR" />
+		<result column="biz_time" property="bizTime" jdbcType="VARCHAR" />
+		<result column="is_default" property="isDefault"
+			jdbcType="VARCHAR" />	
 		<result column="logo_tip" property="logoTip" jdbcType="VARCHAR" />
-		<result column="product_tip" property="productTip" jdbcType="VARCHAR" />
+		<result column="product_tip" property="productTip"
+			jdbcType="VARCHAR" />	
 	</resultMap>
 
 	<sql id="TProduct_Column">
-		id, product_type, product_name, product_picture_url, product_overview, 
-		day_rate, month_rate, year_rate, card_template_id, status, amount_limit, 
-		url, biz_time, is_default, logo_tip, product_tip 
+		id, product_type, product_name, product_picture_url, 
+		day_rate, month_rate, year_rate, borrow_periods, 
+	    status, create_time, update_time, out_url, amount_limit, 
+	    biz_time, is_default, logo_tip, product_tip
 	</sql>
 	<select id="showIndex" resultMap="TProductMap">
 		SELECT 
 			<include refid="TProduct_Column" />
 		FROM t_product
-		WHERE status = '2'
+		WHERE status = '0'
+	</select>
+	
+	<select id="showProduct" resultMap="TProductMap">
+		SELECT 
+			<include refid="TProduct_Column" />
+		FROM t_product
+	</select>
+	
+	<select id="findProductById" resultMap="TProductMap">
+		SELECT 
+			<include refid="TProduct_Column" />
+		FROM t_product 
+		WHERE id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<sql id="setProperty">
+		  <if test="id != null and id != '' " >
+	        id = #{id,jdbcType=VARCHAR},
+	      </if>
+		  <if test="productType != null and productType != '' " >
+	        product_type = #{productType,jdbcType=CHAR},
+	      </if>
+	      <if test="productName != null and productName != '' " >
+	        product_name = #{productName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="productPictureUrl != null and productPictureUrl != '' " >
+	        product_picture_url = #{productPictureUrl,jdbcType=VARCHAR},
+	      </if>
+	      <if test="dayRate != null and dayRate != ''">
+	        day_rate = #{dayRate,jdbcType=DECIMAL},
+	      </if>
+	      <if test="monthRate != null and monthRate != ''" >
+	        month_rate = #{monthRate,jdbcType=DECIMAL},
+	      </if>
+	      <if test="yearRate != null and yearRate != ''" >
+	        year_rate = #{yearRate,jdbcType=DECIMAL},
+	      </if>
+	      <if test="borrowPeriods != null and borrowPeriods != '' " >
+	        borrow_periods = #{borrowPeriods,jdbcType=VARCHAR},
+	      </if>
+	      <if test="status != null and status != '' " >
+	        status = #{status,jdbcType=CHAR},
+	      </if>
+	      <if test="createTime != null" >
+	        create_time = NOW(),
+	      </if>
+	      <if test="updateTime != null" >
+	        update_time = NOW(),
+	      </if>
+	      <if test="outUrl != null  and outUrl != ''" >
+	      	out_url=#{outUrl,jdbcType=VARCHAR},
+	      </if>
+	      <if test="amountLimit != null and amountLimit != ''" >
+	      	amount_limit=#{amountLimit,jdbcType=VARCHAR},
+	      </if>
+	      <if test="bizTime != null  and bizTime != ''" >
+	      	biz_time=#{bizTime,jdbcType=VARCHAR},
+	      </if>
+	      <if test="isDefault != null  and isDefault != ''" >
+	      	is_default=#{isDefault,jdbcType=VARCHAR},
+	      </if>
+	      <if test="logoTip != null">
+	      	logo_tip = #{logoTip,jdbcType=VARCHAR},
+	      </if>
+	      <if test="productTip != null">
+	      	product_tip = #{productTip,jdbcType=VARCHAR}
+	      </if>
+	</sql>
+	
+	<update id="updateProduct" parameterType="com.neo.entity.TProduct">
+		UPDATE t_product 
+		<set >
+<!-- 	      <include refid="setProperty" /> -->
+		  <if test="productType != null and productType != '' " >
+	        product_type = #{productType,jdbcType=CHAR},
+	      </if>
+	      <if test="productName != null and productName != '' " >
+	        product_name = #{productName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="productPictureUrl != null and productPictureUrl != '' " >
+	        product_picture_url = #{productPictureUrl,jdbcType=VARCHAR},
+	      </if>
+	      <if test="dayRate != null and dayRate != ''">
+	        day_rate = #{dayRate,jdbcType=DECIMAL},
+	      </if>
+	      <if test="monthRate != null and monthRate != ''" >
+	        month_rate = #{monthRate,jdbcType=DECIMAL},
+	      </if>
+	      <if test="yearRate != null and yearRate != ''" >
+	        year_rate = #{yearRate,jdbcType=DECIMAL},
+	      </if>
+	      <if test="borrowPeriods != null and borrowPeriods != '' " >
+	        borrow_periods = #{borrowPeriods,jdbcType=VARCHAR},
+	      </if>
+	      <if test="status != null and status != '' " >
+	        status = #{status,jdbcType=CHAR},
+	      </if>
+	      <if test="createTime != null" >
+	        create_time = NOW(),
+	      </if>
+	      <if test="updateTime != null" >
+	        update_time = NOW(),
+	      </if>
+	      <if test="outUrl != null  and outUrl != ''" >
+	      	out_url=#{outUrl,jdbcType=VARCHAR},
+	      </if>
+	      <if test="amountLimit != null and amountLimit != ''" >
+	      	amount_limit=#{amountLimit,jdbcType=VARCHAR},
+	      </if>
+	      <if test="bizTime != null  and bizTime != ''" >
+	      	biz_time=#{bizTime,jdbcType=VARCHAR},
+	      </if>
+	      <if test="isDefault != null  and isDefault != ''" >
+	      	is_default=#{isDefault,jdbcType=VARCHAR},
+	      </if>
+	      <if test="logoTip != null">
+	      	logo_tip = #{logoTip,jdbcType=VARCHAR},
+	      </if>
+	      <if test="productTip != null">
+	      	product_tip = #{productTip,jdbcType=VARCHAR},
+	      </if>
+	    </set>
+    	where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<insert id="insertProduct" parameterType="com.neo.entity.TProduct">
+		INSERT INTO t_product 
+			(
+				<include refid="TProduct_Column" />
+			) VALUES (
+				#{id}, #{productType}, #{productName}, #{productPictureUrl}, 
+				#{dayRate}, #{monthRate}, #{yearRate}, #{borrowPeriods}, 
+				#{status}, NOW(), NOW(), #{outUrl}, #{amountLimit}, 
+				#{bizTime}, #{isDefault}, #{logoTip}, #{productTip}
+			)
+			
+<!-- 		  <trim prefix="(" suffix=")" suffixOverrides="," > -->
+<!-- 			  <if test="id != null and id != '' " > -->
+<!-- 		        id, -->
+<!-- 		      </if> -->
+<!-- 			  <if test="productType != null and productType != '' " > -->
+<!-- 		        product_type, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="productName != null and productName != '' " > -->
+<!-- 		        product_name, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="productPictureUrl != null and productPictureUrl != '' " > -->
+<!-- 		        product_picture_url, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="dayRate != null and dayRate != ''"> -->
+<!-- 		        day_rate, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="monthRate != null and monthRate != ''" > -->
+<!-- 		        month_rate, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="yearRate != null and yearRate != ''" > -->
+<!-- 		        year_rate, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="borrowPeriods != null and borrowPeriods != '' " > -->
+<!-- 		       borrow_periods, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="status != null and status != '' " > -->
+<!-- 		        status, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="createTime != null" > -->
+<!-- 		        create_time, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="updateTime != null" > -->
+<!-- 		        update_time, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="outUrl != null  and outUrl != ''" > -->
+<!-- 		      	out_url, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="amountLimit != null and amountLimit != ''" > -->
+<!-- 		      	amount_limit, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="bizTime != null  and bizTime != ''" > -->
+<!-- 		      	biz_time, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="isDefault != null  and isDefault != ''" > -->
+<!-- 		      	is_default, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="logoTip != null"> -->
+<!-- 		      	logo_tip, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="productTip != null"> -->
+<!-- 		      	product_tip, -->
+<!-- 		      </if> -->
+<!-- 		  </trim> -->
+<!-- 		  <trim prefix="values (" suffix=")" suffixOverrides="," > -->
+<!-- 		  	  <if test="id != null and id != ''"> -->
+<!--   				#{id,jdbcType=VARCHAR}, -->
+<!--   			  </if> -->
+<!-- 			  <if test="productType != null and productType != '' " > -->
+<!-- 		        #{productType,jdbcType=CHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="productName != null and productName != '' " > -->
+<!-- 		        #{productName,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="productPictureUrl != null and productPictureUrl != '' " > -->
+<!-- 		        #{productPictureUrl,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="dayRate != null and dayRate != ''"> -->
+<!-- 		        #{dayRate,jdbcType=DECIMAL}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="monthRate != null and monthRate != ''" > -->
+<!-- 		        #{monthRate,jdbcType=DECIMAL}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="yearRate != null and yearRate != ''" > -->
+<!-- 		        #{yearRate,jdbcType=DECIMAL}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="borrowPeriods != null and borrowPeriods != '' " > -->
+<!-- 		        #{borrowPeriods,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="status != null and status != '' " > -->
+<!-- 		        #{status,jdbcType=CHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="createTime != null" > -->
+<!-- 		        NOW(), -->
+<!-- 		      </if> -->
+<!-- 		      <if test="updateTime != null" > -->
+<!-- 		        NOW(), -->
+<!-- 		      </if> -->
+<!-- 		      <if test="outUrl != null  and outUrl != ''" > -->
+<!-- 		      	#{outUrl,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="amountLimit != null and amountLimit != ''" > -->
+<!-- 		      	#{amountLimit,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="bizTime != null  and bizTime != ''" > -->
+<!-- 		      	#{bizTime,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="isDefault != null  and isDefault != ''" > -->
+<!-- 		      	#{isDefault,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="logoTip != null"> -->
+<!-- 		      	#{logoTip,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		      <if test="productTip != null"> -->
+<!-- 		      	#{productTip,jdbcType=VARCHAR}, -->
+<!-- 		      </if> -->
+<!-- 		  </trim> -->
+	</insert>
+	
+	<select id="findProductByTitleOrStatus" resultMap="TProductMap">
+		SELECT 
+			<include refid="TProduct_Column" />
+		FROM t_product 
+		WHERE 1 = 1 
+		<if test="productName != null and productName != ''">
+	      	AND product_name LIKE CONCAT(CONCAT('%', #{productName}), '%') 
+	    </if>
+	    <if test="status != null and status != ''">
+	      	AND status = #{status} 
+	    </if>
 	</select>
 
 </mapper>

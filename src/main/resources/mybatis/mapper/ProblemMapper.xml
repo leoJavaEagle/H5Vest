@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.neo.mapper.ProblemMapper">
 
+	<select id="showAllProblem" resultType="com.neo.entity.TProblem">
+		SELECT 
+			id,title,content,create_time createTime,status 
+		FROM t_problem ORDER BY create_time DESC
+	</select>
+
 	<select id="showProblem" resultType="com.neo.entity.TProblem">
 		SELECT 
 			id,title,content,create_time createTime,status 
@@ -11,8 +17,36 @@
 	
 	<select id="showProblemDetails" resultType="com.neo.entity.TProblem">
 		SELECT 
-			title,content 
+			id, title, content, status
 		FROM t_problem 
 		WHERE id = #{problemId,jdbcType=VARCHAR}
 	</select>
+	
+	<update id="updateProblem" parameterType="com.neo.entity.TProblem">
+		UPDATE t_problem 
+			SET title = #{title},content = #{content}, status = #{status}, update_time = NOW()
+		WHERE id = #{id}
+	</update>
+	
+	<insert id="insertProblem" parameterType="com.neo.entity.TProblem">
+		INSERT INTO t_problem 
+			(id, title, content, create_time, status) 
+		VALUES (
+			#{id}, #{title}, #{content}, NOW(), #{status} 
+		)
+	</insert>
+	
+	<select id="findProblemByTitleOrStatus" resultType="com.neo.entity.TProblem">
+		SELECT 
+			id, title, create_time createTime, status 
+		FROM t_problem 
+		WHERE 1 = 1 
+		<if test="title != null and title != ''">
+	      	AND title LIKE CONCAT(CONCAT('%', #{title}), '%') 
+	    </if>
+	    <if test="status != null and status != ''">
+	      	AND status = #{status} 
+	    </if>
+	</select>
+	
 </mapper>
