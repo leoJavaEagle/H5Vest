@@ -51,13 +51,10 @@ public class TModel implements Serializable
      */
     private String startTime;
     
-    public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
+    /**
+     * 审核结束时间 
+     */
+    private String endTime;
 
 	public String getEndTime() {
 		return endTime;
@@ -67,10 +64,7 @@ public class TModel implements Serializable
 		this.endTime = endTime;
 	}
 
-	/**
-     * 审核结束时间 
-     */
-    private String endTime;
+	
     
     /**
      * 状态：0 审核中  1 审核结束
@@ -147,6 +141,14 @@ public class TModel implements Serializable
 
 	public void setMarketName(String marketName) {
 		this.marketName = marketName;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
     
 }

@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.neo.mapper.VestMapper">
+
+	<resultMap id="BaseResultMap" type="com.neo.entity.TModel" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="source" property="source" jdbcType="VARCHAR" />
+        <result column="market_code" property="marketCode" jdbcType="VARCHAR" />
+        <result column="market_name" property="marketName" jdbcType="VARCHAR"/>
+        <result column="index" property="index" jdbcType="VARCHAR" />
+        <result column="article" property="article" jdbcType="VARCHAR" />
+        <result column="counter" property="counter" jdbcType="VARCHAR"/>
+        <result column="mine" property="mine" jdbcType="VARCHAR" />
+        <result column="start_time" property="startTime" jdbcType="VARCHAR"/>
+        <result column="end_time" property="endTime" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR" />
+    </resultMap>
 	
-	<select id="findAuditingStatus" resultType="String">
+	<select id="findAuditingstatus" resultType="String">
 		SELECT 
 			status 
 		FROM t_model 
@@ -16,11 +30,60 @@
 		WHERE source = #{source} AND market_code = #{marketCode}
 	</select>
 	
-	<select id="showModelAndStatus" resultType="com.neo.entity.TModel">
+	<select id="showModelAndstatus" resultType="com.neo.entity.TModel">
 		SELECT 
 			tm.index, tm.article, tm.counter, tm.mine, tm.status
 		FROM t_model tm
 		WHERE source = #{source} AND market_code = #{marketCode}
 	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap">
+       SELECT 
+       tm.id,tm.source,tm.market_code,tm.market_name,tm.index,tm.article,
+       tm.counter,tm.mine,tm.start_time,tm.end_time,tm.status
+	   FROM t_model tm
+	   ORDER BY tm.status ASC, tm.end_time ASC
+    </select>
+	
+	<select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap">
+       SELECT 
+       	tm.id,tm.source,tm.market_code,tm.market_name,tm.index,tm.article,
+       	tm.counter,tm.mine,tm.start_time,tm.end_time,tm.status
+	   FROM t_model tm
+	   WHERE id = #{id}
+    </select>
 
+	<insert id="insert" parameterType="com.neo.entity.TModel" >
+       INSERT INTO 
+       		t_model
+       		(`id`,`source`,`market_code`,`market_name`,`index`,`article`,`counter`,`mine`,`start_time`,`end_time`,`status`) 
+       	VALUES
+       		(FLOOR( 1 + RAND() * (1000 - 500)),#{source},#{marketCode},#{marketName},#{index},#{article},#{counter},#{mine},#{startTime},#{endTime},#{status})
+    </insert>
+    
+    <update id="update" parameterType="com.neo.entity.TModel" >
+       UPDATE 
+       		t_model tm
+       SET 
+       	tm.source = #{source},
+       	tm.market_code = #{marketCode},
+       	tm.market_name = #{marketName},
+       	tm.index = #{index},
+       	tm.article = #{article},
+       	tm.counter = #{counter},
+       	tm.mine = #{mine},
+       	tm.start_time = #{startTime},
+       	tm.end_time = #{endTime},
+       	tm.status = #{status}
+       WHERE 
+       		tm.id = #{id}
+    </update>
+    
+	<delete id="delete" parameterType="java.lang.String" >
+       DELETE FROM
+       		 t_model 
+       WHERE 
+       		 id =#{id}
+    </delete>
+    
 </mapper>

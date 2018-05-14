@@ -128,4 +128,4 @@ $('.datepicker').datepicker({
 	</div>
 </form>
 <c:url var="url" value="/ttms/product/product_edit.js"></c:url>
-<script type="text/javascript" src="${url}"></script>
+<%-- <script type="text/javascript" src="${url}"></script> --%>

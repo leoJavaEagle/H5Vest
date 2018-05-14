@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.neo.entity.BaseDataResp;
 import com.neo.entity.TProblem;
+import com.neo.entity.TArticle;
 import com.neo.entity.TProduct;
+import com.neo.mapper.ArticleMapper;
 import com.neo.mapper.IndexMapper;
 import com.neo.mapper.ProblemMapper;
 
@@ -24,6 +27,9 @@ public class IndexController {
 	
 	@Autowired
 	private ProblemMapper problemMapper;
+
+	@Autowired
+	private ArticleMapper articleMapper;
 
 	@RequestMapping("/index")
 	@ResponseBody

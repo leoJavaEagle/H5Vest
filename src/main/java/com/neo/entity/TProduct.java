@@ -6,7 +6,7 @@ import java.util.Date;
 public class TProduct implements Serializable
 {
 
-	private static final long serialVersionUID = 7497623608779895909L;
+	private static final long serialVersionUID = 9014323778555290934L;
 
 	/**
      * 产品主键ID
@@ -54,11 +54,6 @@ public class TProduct implements Serializable
     private String status;
     
     /**
-     * 创建时间
-     */
-    private String createTime;
-    
-    /**
      * 最后修改时间
      */
     private Date updateTime;
@@ -79,6 +74,11 @@ public class TProduct implements Serializable
     private String  bizTime;
     
     /**
+     * 创建时间
+     */
+    private String createTime;
+    
+    /**
      * 是否默认产品
      */
     private String isDefault;
@@ -93,7 +93,7 @@ public class TProduct implements Serializable
      */
     private String productTip;
 
-    public String getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -165,14 +165,6 @@ public class TProduct implements Serializable
 		this.status = status;
 	}
 
-	public String getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-
 	public Date getUpdateTime() {
 		return updateTime;
 	}
@@ -205,6 +197,14 @@ public class TProduct implements Serializable
 		this.bizTime = bizTime;
 	}
 
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
 	public String getIsDefault() {
 		return isDefault;
 	}
@@ -228,16 +228,5 @@ public class TProduct implements Serializable
 	public void setProductTip(String productTip) {
 		this.productTip = productTip;
 	}
-
-	@Override
-	public String toString() {
-		return "TProduct [id=" + id + ", productType=" + productType + ", productName=" + productName
-				+ ", productPictureUrl=" + productPictureUrl + ", dayRate=" + dayRate + ", monthRate=" + monthRate
-				+ ", yearRate=" + yearRate + ", borrowPeriods=" + borrowPeriods + ", status=" + status + ", createTime="
-				+ createTime + ", updateTime=" + updateTime + ", outUrl=" + outUrl + ", amountLimit=" + amountLimit
-				+ ", bizTime=" + bizTime + ", isDefault=" + isDefault + ", logoTip=" + logoTip + ", productTip="
-				+ productTip + "]";
-	}
     
-	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,11 +26,20 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping("/getArticles")
-	public Object getArticles() {
-		ModelAndView mv = new ModelAndView();
-		List<TArticle> taList=articleMapper.getAll();
-		mv.addObject("list", taList);
-		return mv;
+	@ResponseBody
+	public BaseDataResp getArticles() {
+		BaseDataResp resp = new BaseDataResp();
+		List<TArticle> list=articleMapper.getAll();
+		if(null == list){
+			resp.setCode("000001");
+			resp.setMessage("获取失败");
+			return resp;
+		}else{
+			resp.setCode("000000");
+			resp.setMessage("获取成功");
+			resp.setData(list);
+		}
+		return resp;
 	}
 	
 	/**
@@ -63,28 +73,66 @@ public class ArticleController {
     public BaseDataResp getArticle(@RequestParam String id) {
     	BaseDataResp resp = new BaseDataResp();
     	TArticle ta=articleMapper.getOne(id);
-    	resp.setCode("000000");
-		resp.setMessage("成功");
-		resp.setData(ta);
-        return resp;
-    }
+//    	System.out.println(ta.getTitle());
+    	if(null == ta){
+			resp.setCode("000001");
+			resp.setMessage("获取失败");
+			return resp;
+		}else{
+			resp.setCode("000000");
+			resp.setMessage("获取成功");
+			resp.setData(ta);
+		}
+		return resp;
+	}
+	
+	 @RequestMapping("/getArticleEdit")
+	    public String getArticleEdit(){
+			
+			return "article/article_edit";
+		}
+	
     
     /**
 	 * 插入一条资讯
 	 * @param ta
 	 */
+	@ResponseBody
     @RequestMapping("/addArticle")
-    public void save(TArticle ta) {
-    	articleMapper.insert(ta);
+    public BaseDataResp save(TArticle ta) {
+    	BaseDataResp resp = new BaseDataResp();
+    	Integer s = articleMapper.insert(ta);
+    	if(s==null){
+    		resp.setCode("000001");
+			resp.setMessage("添加失败");
+			return resp;
+    	}else{
+			resp.setCode("000000");
+			resp.setMessage("添加成功");
+		}
+    	return resp;
     }
     
     /**
 	 * 更新全部资讯
 	 * @param ta
 	 */
+	@ResponseBody
     @RequestMapping(value="/updateArticle")
-    public void update(TArticle ta) {
-    	articleMapper.update(ta);
+    public BaseDataResp update(TArticle ta) {
+//		System.out.println(ta.getStatus());
+    	BaseDataResp resp = new BaseDataResp();
+    	Integer s = articleMapper.update(ta);
+//    	System.out.println(s);
+    	if(s==0){
+    		resp.setCode("000001");
+			resp.setMessage("更新失败");
+			return resp;
+    	}else{
+			resp.setCode("000000");
+			resp.setMessage("更新成功");
+		}
+    	return resp;
     }
     
     /**
@@ -100,9 +148,22 @@ public class ArticleController {
 	 * 删除一条资讯
 	 * @param id
 	 */
-    @RequestMapping(value="/deleteArticle/{id}")
-    public void delete(@PathVariable("id") String id) {
-    	articleMapper.delete(id);
+    @ResponseBody
+    @RequestMapping(value="/deleteArticle")
+    public BaseDataResp delete(@RequestParam String id) {
+    	BaseDataResp resp = new BaseDataResp();
+    	Integer s = articleMapper.delete(id);
+    	System.out.println(s);
+    	if(s==null){
+    		resp.setCode("000001");
+			resp.setMessage("删除失败");
+			return resp;
+    	}else{
+			resp.setCode("000000");
+			resp.setMessage("删除成功");
+		}
+    	return resp;
+    	
     }
     
     
