@@ -4,7 +4,9 @@
     <resultMap id="BaseResultMap" type="com.neo.entity.TArticle" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="title" property="title" jdbcType="VARCHAR" />
-        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="content_one" property="contentOne" jdbcType="VARCHAR" />
+        <result column="picture_one" property="pictureOne" jdbcType="VARCHAR" />
+        <result column="content_two" property="contentTwo" jdbcType="VARCHAR" />
         <result column="read_count" property="readCount" jdbcType="VARCHAR"/>
         <result column="image" property="image" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
@@ -12,7 +14,7 @@
     </resultMap>
     
     <sql id="Base_Column_List" >
-        id,title,content,read_count,image,create_time,status
+        id,title,content_one,picture_one,content_two,read_count,image,create_time,status
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap"  >
@@ -40,9 +42,9 @@
     <insert id="insert" parameterType="com.neo.entity.TArticle" >
        INSERT INTO 
        		t_article
-       		(id,title,content,read_count,image,create_time,status) 
+       		(id,title,content_one,content_two,read_count,image,create_time,status) 
        	VALUES
-       		(FLOOR( 500 + RAND() * (1000 - 500)),#{title,jdbcType=VARCHAR},#{content},#{readCount},#{image},NOW(),#{status})
+       		(FLOOR( 500 + RAND() * (1000 - 500)),#{title,jdbcType=VARCHAR},#{contentOne},#{contentTwo},#{readCount},#{image},NOW(),#{status})
     </insert>
     
     <update id="update" parameterType="com.neo.entity.TArticle" >
@@ -50,7 +52,8 @@
        		t_article ta
        SET 
        	ta.title = #{title,jdbcType=VARCHAR},
-       	ta.content = #{content},
+       	ta.content_one = #{contentOne},
+       	ta.content_two = #{contentTwo},
        	ta.read_count = #{readCount},
        	ta.status = #{status}
        WHERE 
