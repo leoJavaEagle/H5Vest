@@ -15,10 +15,17 @@ $('.datepicker').datepicker({
 	    </div>
 	</div>
 	<div class="form-group">
-		<label for="project-code" class="col-sm-2 control-label">资讯内容:</label> 
+		<label for="project-code" class="col-sm-2 control-label">文章内容1段:</label> 
 		<div class="col-sm-10">
 		<!-- <input type="text" class="form-control required" name="code" id="codeId">-->
-		<textarea rows="10" cols="8" class="form-control required" name="content" id="content" ></textarea>
+		<textarea rows="5" cols="5" class="form-control required" name="contentOne" id="contentOne" ></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="project-code" class="col-sm-2 control-label">文章内容2段:</label> 
+		<div class="col-sm-10">
+		<!-- <input type="text" class="form-control required" name="code" id="codeId">-->
+		<textarea rows="5" cols="5" class="form-control required" name="contentTwo" id="contentTwo" ></textarea>
 		</div>
 	</div>
 	<!--  <div class="form-group">

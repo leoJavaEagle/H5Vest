@@ -17,9 +17,19 @@ public class TArticle implements Serializable
     private String title;
     
     /**
-     * 文章内容
+     * 文章内容one
      */
-    private String content;
+    private String contentOne;
+    
+    /**
+     * 文章图片路径 one
+     */
+    private String pictureOne;
+    
+    /**
+     * 文章内容two
+     */
+    private String contentTwo;
     
     /**
      * 文章阅读量
@@ -27,7 +37,7 @@ public class TArticle implements Serializable
     private String readCount;
     
     /**
-     * 文章图片路径 
+     * 标题图片路径 
      */
     private String image;
     
@@ -58,12 +68,28 @@ public class TArticle implements Serializable
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
+	public String getContentOne() {
+		return contentOne;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setContentOne(String contentOne) {
+		this.contentOne = contentOne;
+	}
+
+	public String getPictureOne() {
+		return pictureOne;
+	}
+
+	public void setPictureOne(String pictureOne) {
+		this.pictureOne = pictureOne;
+	}
+
+	public String getContentTwo() {
+		return contentTwo;
+	}
+
+	public void setContentTwo(String contentTwo) {
+		this.contentTwo = contentTwo;
 	}
 
 	public String getReadCount() {

@@ -31,7 +31,8 @@ function doFindObjectById(id){
 /*修改初始化表单数据*/
 function doInitFormData(data){
 	$("#title").val(data.title);
-	$("#content").val(data.content);
+	$("#contentOne").val(data.contentOne);
+	$("#contentTwo").val(data.contentTwo);
 //	$("#createTime").val(data.createTime);
 	$("#readCount").val(data.readCount);
 //	$("#noteId").html(data.note);
@@ -76,7 +77,8 @@ function doSaveOrUpdate(){
 function getEditFormData(){
 	var params={
 	  title:$("#title").val(),
-	  content:$("#content").val(),
+	  contentOne:$("#contentOne").val(),
+	  contentTwo:$("#contentTwo").val(),
 //	  createTime:$("#createTime").val(),
 	  readCount:$("#readCount").val(),
 	  status:$("input[type='radio']:checked").val()
