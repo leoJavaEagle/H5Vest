@@ -34,7 +34,7 @@ public class MyInterceptor extends WebMvcConfigurerAdapter {
 	    	.excludePathPatterns("/mine/problemDetails")
     		.excludePathPatterns("/vest/auditing")
     		.excludePathPatterns("/vest/showModel")
-    		.excludePathPatterns("/showModelAndStatus") 
+    		.excludePathPatterns("/vest/showModelAndStatus")
 	    	.excludePathPatterns("/console/login")
 	    	.excludePathPatterns("/console/logout")
         	.excludePathPatterns("/console/checkLogin");

@@ -40,10 +40,10 @@ public class VestController {
 			resp.setDescription("查询错误！");
 			return resp;
 		}else if("0".equals(statusInfo)) {
-			resp.setCode("000000");
+			resp.setCode("000001");
 			resp.setDescription("审核中");
 		}else {
-			resp.setCode("000001");
+			resp.setCode("000000");
 			resp.setDescription("审核结束");
 		}
 //		resp.setObject(statusInfo);
@@ -175,10 +175,9 @@ public class VestController {
 		return resp;
 	}
 	
-	 @RequestMapping("/getModelEdit")
-	    public String getModelEdit(){
-			
-			return "model/model_edit";
-		}
+	@RequestMapping("/getModelEdit")
+    public String getModelEdit(){
+		return "model/model_edit";
+	}
 	
 }
