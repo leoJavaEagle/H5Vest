@@ -116,28 +116,25 @@ function doQueryObjects(){
 
 /*获得查询表单中的数据*/
 function getQueryFormData(){
+	//获取当前页的页码值,假如没有值,默认值设置为1
+	var pageCurrent=$("#pageId").data("pageCurrent");
+	if(!pageCurrent){
+		pageCurrent=1;
+	}
 	//根据id获得具体对象的值,然后封装到JSON对象
 	var params = JSON.stringify({
-		title:$("#searchNameId").val(),
+		pageCurrent:pageCurrent,
+		productName:$("#searchNameId").val(),
 		status:$("#searchValidId").val()
 	});
     return params;
 }
 
 function doGetObjects(){
-	//获取当前页的页码值,假如没有值,默认值设置为1
-	var pageCurrent=$("#pageId").data("pageCurrent");
-	if(!pageCurrent){
-		pageCurrent=1;
-	}
 	//定义一个url(对应服务端控制器中的一个方法)
 	var url="showProblemInfo"
 	//定义一个params对象
 	var params=getQueryFormData();
-	//动态的向params对象中添加key/value
-//	params.pageCurrent=pageCurrent;
-	//底层发起ajax异步请求($.ajax({....}))
-	//post方法是一个增强版的ajax方法
 //    $.ajaxSettings.async = true; // 异步请求
     $.ajax({
 		 "url": url,
@@ -148,27 +145,18 @@ function doGetObjects(){
 	    	if(result.code == "000000") {
 	    		//alert(result.message);//假如有需要
 		    	//显示记录信息
-		    	setTableBodyRows(result.data);
-		    	//设置及显示分页信息
-//		    	setPagination(result.data.page);
+		    	setTableBodyRows(result.data.problemInfo);
 	 		}else {
-	 			alert(result.message);
+	 			$("#tbodyId").empty();
+	 			//设置及显示分页信息
 	 		}
+	    	//设置分页信息(函数定义在了page.js文件中)
+	    	//设置及显示分页信息
+	    	setPagination(result.data.pageInfo);
 	     }
 	});
-//    $.post(url,params,function(result) {
-//    	if(result.code == "000000"){//成功
-//	    	//alert(result.message);//假如有需要
-//	    	//显示记录信息
-//	    	setTableBodyRows(result.data);
-//	    	//设置及显示分页信息
-////	    	setPagination(result.data.page);
-//    	}else {//失败了(获取数据时出现异常了)
-//    		alert(result.message);
-//    	}
-//    });	
-
 }
+
 //定义函数将json对象中的数据取出来填充到表格中
 function setTableBodyRows(result){//result 为一个json对象
 	//获得tbody对象(根据id获得)
@@ -182,10 +170,10 @@ function setTableBodyRows(result){//result 为一个json对象
 		//在tr对象上绑定一个值
 		tr.data("id",result[i].id);//key/value
 		//tr对象中追加td字符串对象
-		var firstTd='<td><input type="checkbox" name="checkedItem" value="[id]"></td>';
+		var firstTd='<td hidden><input type="checkbox" name="checkedItem" value="[id]"></td>';
 		//将firstTd字符串中的[id]替换为一个具体指
 		firstTd=firstTd.replace("[id]",result[i].id);
-		tr.append(firstTd);	
+		tr.append(firstTd);
 		tr.append("<td>"+result[i].title+"</td>");
 		tr.append("<td>"+result[i].createTime+"</td>");
 		tr.append("<td>"+result[i].status+"</td>");

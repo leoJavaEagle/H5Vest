@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.neo.entity.TModel;
 import com.neo.entity.TProblem;
 import com.neo.entity.TProduct;
 import com.neo.entity.User;
@@ -63,7 +64,7 @@ public class IndexContoller {
 	
 	@Test
 	public void showProblemDetails() {
-		List<TProblem> list = problemMapper.showProblemDetails("2");
+		List<TProblem> list = (List<TProblem>) problemMapper.showProblemDetails("2");
 		System.out.println(list.get(0).getTitle());
 		System.out.println(list.get(0).getContent());
 	}
@@ -72,6 +73,24 @@ public class IndexContoller {
 	public void vestTest() {
 		String status = vestMapper.findAuditingStatus("ios", "ios");
 		System.out.println("审核状态 : " + status);
+	}
+	
+	@Test
+	public void vestTest1() {
+		TModel model = vestMapper.showModelAndStatus("IOS", "ios");
+		System.out.println(model.getArticle());
+	}
+	
+	@Test
+	public void vestTest2() {
+		String model = vestMapper.findAuditingStatus("IOS", "ios");
+		System.out.println(model);
+	}
+	
+	@Test
+	public void vestTest3() {
+		TModel model = vestMapper.showModel("IOS", "ios");
+		System.out.println(model.getArticle());
 	}
 	
 	@Test

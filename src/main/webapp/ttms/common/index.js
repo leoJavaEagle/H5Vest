@@ -39,3 +39,4 @@ function doLoadUrl(){
 	url = url+'?t=;'+Math.random(1000);
 	$("#container").load(url);
 }
+

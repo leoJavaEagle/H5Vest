@@ -15,6 +15,7 @@ function doLoadEditPage() {
 	   title="添加项目信息"
    }else if($(this).hasClass("btn-update")) {
 	   var idValue=$(this).parent().parent().data("idKey")
+	   // 绑定 idValue 到模态框 data 上
 	   $("#modal-dialog").data("idKey",idValue);
 	   title="修改项目信息";
    }
@@ -27,8 +28,6 @@ function doLoadEditPage() {
 	  $("#modal-dialog").modal("show");
    });
 };
-
-
 
 /*禁用或启用项目信息*/
 function doValidById(){//valid,ids
@@ -84,17 +83,15 @@ function doQueryObjects(){
 
 /*获取项目信息*/
 function doGetObjects(){
+//	debugger;
 	var url="showProductInfo"
 	var pageCurrent=$("#pageId").data("pageCurrent");
 	if(!pageCurrent)pageCurrent=1;//默认取第一页的数据
-//	var params={"pageCurrent":pageCurrent};
-//	"pageCurrent":pageCurrent,
-	var params= JSON.stringify({
-		"productName":$("#searchNameId").val(),
-		"status":$("#searchValidId").val()
-	});
-//	params.productName=$("#searchNameId").val(); // 产品名称
-//	params.status=$("#searchValidId").val(); // 产品状态
+	var params = JSON.stringify({
+		pageCurrent:pageCurrent,
+		productName:$("#searchNameId").val(),
+		status:$("#searchValidId").val()
+	})
 	//发起异步请求获取服务端数据
 	$.ajax({
 		 "url": url,
@@ -104,27 +101,17 @@ function doGetObjects(){
 	     "success": function(result){
 	 		if(result.code == "000000") {
 	 			//将数据显示在table的tbody位置
-				setTableBodyRows(result.data);//map中的key对应的值
-				//设置分页信息(函数定义在了page.js文件中)
-//				setPagination(result.data.pageObject);
+				setTableBodyRows(result.data.productInfo);//map中的key对应的值
 	 		}else {
-	 			alert(result.message);
+	 			$("#tbodyId").empty();
 	 		}
+	 		//设置分页信息(函数定义在了page.js文件中)
+	 		//设置及显示分页信息
+	 		setPagination(result.data.pageInfo);
 	     }
 	});
-	
-	
-//	$.getJSON(url, params, function(result){
-//		if(result.code=="000000") {
-//			//将数据显示在table的tbody位置
-//			setTableBodyRows(result.data);//map中的key对应的值
-//			//设置分页信息(函数定义在了page.js文件中)
-////			setPagination(result.data.pageObject);
-//		}else {
-//			alert(result.message);
-//		}
-//	});
 }
+
 /*将数据填充在table对象的body中*/
 function setTableBodyRows(data){//扩展作业
 	 //1.获得tbody对象
@@ -135,7 +122,7 @@ function setTableBodyRows(data){//扩展作业
 		 //2.1构建一个tr对象
 		 var tr=$("<tr></tr>");
 		 tr.data("idKey",data[i].id);
-		 var tds="<td><input type='checkbox' name='checkId' value='"+data[i].id+"'></td>"+
+		 var tds="<td hidden><input type='checkbox' name='checkId' value='"+data[i].id+"'></td>"+
 		         "<td>"+data[i].productName+"</td>"+
 		         "<td>"+data[i].createTime+"</td>"+
 		         "<td>"+data[i].status+"</td>"+

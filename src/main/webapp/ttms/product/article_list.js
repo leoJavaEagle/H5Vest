@@ -170,7 +170,7 @@ function setTableBodyRows(data){//扩展作业
 	 //2.3在td对象内容填充具体数据
 	 //td0.append(result[id].id);
 	 //....
-	 var tds="<td><input type='checkbox' name='checkId' value='"+data[i].id+"'></td>"+
+	 var tds="<td hidden><input type='checkbox' name='checkId' value='"+data[i].id+"'></td>"+
 	         "<td>"+data[i].id+"</td>"+
 	         "<td>"+data[i].title+"</td>"+
 	         "<td>"+data[i].createTime+"</td>"+

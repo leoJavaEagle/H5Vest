@@ -37,7 +37,7 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-						   <th>选择</th>
+<!-- 						   <th>选择</th> -->
 							<th>来源</th>
 							<th>渠道商标识码</th>
 							<th>渠道名称</th>
@@ -45,8 +45,8 @@
 							<th>资讯模块</th>
 							<th>计算器模块</th>
 							<th>我的模块</th>
-							<th>审核开始时间</th>
-							<th>审核结束时间</th>
+							<th>审核开始</th>
+							<th>审核结束</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>

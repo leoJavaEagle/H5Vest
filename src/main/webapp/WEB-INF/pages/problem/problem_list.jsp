@@ -37,7 +37,7 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-						   <th>选择</th>
+<!-- 						    <th>选择</th> -->
 							<th>标题</th>
 							<th>创建时间</th>
 							<th>状态</th>

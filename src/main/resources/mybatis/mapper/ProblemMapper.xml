@@ -5,12 +5,21 @@
 	<select id="showAllProblem" resultType="com.neo.entity.TProblem">
 		SELECT 
 			id,title,content,create_time createTime,status 
-		FROM t_problem ORDER BY create_time DESC
+		FROM t_problem 
+		ORDER BY create_time DESC 
+	</select>
+	
+	<select id="showProblems" resultType="com.neo.entity.TProblem">
+		SELECT 
+			id,title,content,create_time createTime,status 
+		FROM t_problem 
+		ORDER BY create_time DESC 
+		LIMIT #{pageCurrent}, #{showAmount}
 	</select>
 
 	<select id="showProblem" resultType="com.neo.entity.TProblem">
 		SELECT 
-			id,title,content,create_time createTime,status 
+			id, title, content, create_time createTime, status 
 		FROM t_problem 
 		WHERE status = '0'
 	</select>
@@ -36,6 +45,19 @@
 		)
 	</insert>
 	
+	<select id="findProblemByTitleOrStatuAll" resultType="com.neo.entity.TProblem">
+		SELECT 
+			id, title, create_time createTime, status 
+		FROM t_problem 
+		WHERE 1 = 1 
+		<if test="title != null and title != ''">
+	      	AND title LIKE CONCAT(CONCAT('%', #{title}), '%') 
+	    </if>
+	    <if test="status != null and status != ''">
+	      	AND status = #{status} 
+	    </if>
+	</select>
+	
 	<select id="findProblemByTitleOrStatus" resultType="com.neo.entity.TProblem">
 		SELECT 
 			id, title, create_time createTime, status 
@@ -47,6 +69,8 @@
 	    <if test="status != null and status != ''">
 	      	AND status = #{status} 
 	    </if>
+	    ORDER BY create_time 
+	    LIMIT #{startIndex}, #{showAmount}
 	</select>
 	
 </mapper>

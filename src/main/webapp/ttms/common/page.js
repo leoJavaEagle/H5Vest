@@ -1,21 +1,21 @@
 $(document).ready(function(){
 	//在pageId对应的对象的相关元素上注册点击事件
-	$("#pageId").on('click',
-	'.pre,.next,.first,.last',jumpToPage);
+	$("#pageId").on('click', '.pre,.next,.first,.last',jumpToPage);
 });
 
 //设置分页
-function setPagination(pageObject){
- //1.初始化总页数
- $(".pageCount").html("总页数("+pageObject.pageCount+")");
+function setPagination(pageInfo){
+ //1.初始化总页数，显示前端
+ $(".pageCount").html("总页数("+pageInfo.pageCount+")");
  //2.初始化当前页的页码
- $(".pageCurrent").html("当前页("+pageObject.pageCurrent+")");
- //3.在pageId对应的对象上绑定总页数
- //data函数用于以key/value的方式在对象上绑定数据
- $("#pageId").data("pageCount",pageObject.pageCount);
- //4.在pageId对象的对象上绑定当前页面值
- $("#pageId").data("pageCurrent",pageObject.pageCurrent);
+ $(".pageCurrent").html("当前页("+pageInfo.page+")");
+ 
+ //3.总页
+ $("#pageId").data("pageCount",pageInfo.pageCount);
+ //4.当前页
+ $("#pageId").data("pageCurrent",pageInfo.page);
 }
+
 //定义一个函数,通过此函数实现页面的跳转
 function jumpToPage(){
 	//获得点击对象上class属性对应的值,根据此值
@@ -47,7 +47,25 @@ function jumpToPage(){
 	doGetObjects();
 }
 
-
+$.extend($.validator.messages, {
+    required: "这是必填字段",
+    remote: "请修正此字段",
+    email: "请输入有效的电子邮件地址",
+    url: "请输入有效的网址",
+    date: "请输入有效的日期",
+    dateISO: "请输入有效的日期 (YYYY-MM-DD)",
+    number: "请输入有效的数字",
+    digits: "只能输入数字",
+    creditcard: "请输入有效的信用卡号码",
+    equalTo: "你的输入不相同",
+    extension: "请输入有效的后缀",
+    maxlength: $.validator.format("最多可以输入 {0} 个字符"),
+    minlength: $.validator.format("最少要输入 {0} 个字符"),
+    rangelength: $.validator.format("请输入长度在 {0} 到 {1} 之间的字符串"),
+    range: $.validator.format("请输入范围在 {0} 到 {1} 之间的数值"),
+    max: $.validator.format("请输入不大于 {0} 的数值"),
+    min: $.validator.format("请输入不小于 {0} 的数值")
+});
 
 
 

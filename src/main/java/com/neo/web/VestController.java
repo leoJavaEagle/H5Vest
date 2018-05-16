@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neo.entity.BaseDataResp;
+import com.neo.entity.BaseDataRespAndroid;
 import com.neo.entity.TArticle;
 import com.neo.entity.TModel;
 import com.neo.mapper.VestMapper;
@@ -30,22 +31,22 @@ public class VestController {
 	 */
 	@RequestMapping("/auditing")
 	@ResponseBody
-	public BaseDataResp findAuditingStatus(@RequestBody Source util) {
+	public BaseDataRespAndroid findAuditingStatus(@RequestBody Source util) {
 		System.out.println(util.getSource() + ",  " + util.getMarketCode());
-		BaseDataResp resp = new BaseDataResp();
+		BaseDataRespAndroid resp = new BaseDataRespAndroid();
 		String statusInfo = vestMapper.findAuditingStatus(util.getSource(), util.getMarketCode());
 		if(statusInfo == null) {
 			resp.setCode("000002");
-			resp.setMessage("查询错误！");
+			resp.setDescription("查询错误！");
 			return resp;
 		}else if("0".equals(statusInfo)) {
-			resp.setCode("000001");
-			resp.setMessage("审核中");
-		}else {
 			resp.setCode("000000");
-			resp.setMessage("审核结束");
+			resp.setDescription("审核中");
+		}else {
+			resp.setCode("000001");
+			resp.setDescription("审核结束");
 		}
-		resp.setData(statusInfo);
+//		resp.setObject(statusInfo);
 		return resp;
 	}
 	

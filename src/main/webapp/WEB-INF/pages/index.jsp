@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="${basePath}/bootstrap/css/font-awesome.min.css">
 <link rel="stylesheet" href="${basePath}/dist/css/ionicons.min.css">
 <link rel="stylesheet" href="${basePath}/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="${basePath}/dist/css/mycss/my.css">
 <link rel="stylesheet" href="${basePath}/dist/css/skins/_all-skins.min.css">
 <link rel="stylesheet" href="${basePath}/bootstrap/plugins/ztree/css/metroStyle/metroStyle.css">
 <link rel="stylesheet" href="${basePath}/bootstrap/plugins/treegrid/jquery.treegrid.css">
@@ -35,6 +36,7 @@
 <script src="${basePath}/bootstrap/plugins/ztree/jquery.ztree.all.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${basePath}/dist/js/app.min.js"></script>
+<%-- <script src="${basePath}/ttms/common/index.js"></script> --%>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -82,8 +84,3 @@
   </div><!-- modal -->
 </body>
 </html>
-
-
-
-
-
