@@ -61,14 +61,13 @@ function doSaveOrUpdate(){
 	if(!$("#editFormId").valid())return;
 	//2.获得输入的数据
 	var params=getEditFormData();
+	if(!params) {
+		return;
+	}
 	//3.将数据异步发送到服务端
-	//3.1定义url(对应controller中的一个方法)
-	//获得模态框上绑定的id值
-	var id=$("#modal-dialog").data("id");
-//	if(id)params.id=id;//动态添加属性(修改时需要id的值)
-	//根据id是否有值来判定是修改还是添加
 	var updateProblem="updateProblem";
 	var insertProblem="insertProblem";
+	var id = $("#problemId").val();
 	var url=id?updateProblem:insertProblem;
 	$.ajax({
 		 "url": url,
@@ -101,15 +100,21 @@ function doSaveOrUpdate(){
 //	});
 }
 function getEditFormData(){
- //1.获得页面上用户输入的数据,封装为json对象(相对比较灵活)
-  var params = JSON.stringify({//根据id获得数据
-	  "id":$("#problemId").val(),
-	  "title":$("#title").val(),
-	  "status":$("input[name='status']:checked").val(),
-	  "content":$("#content").val()
-  });
-  //2.返回json对象
-  return params;
+	$("#errorInfo").text("");
+	var status = $("input[name='status']:checked").val();
+	if(!status) {
+		$("#errorInfo").text("至少选择一项状态！").css("color", "red");
+		return;
+	}
+	//1.获得页面上用户输入的数据,封装为json对象(相对比较灵活)
+	var params = JSON.stringify({//根据id获得数据
+		 "id":$("#problemId").val(),
+		 "title":$("#title").val(),
+		 "status":status,
+		 "content":$("#content").val()
+	});
+	//2.返回json对象
+	return params;
 }
 
 

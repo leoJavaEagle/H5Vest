@@ -9,12 +9,17 @@ import com.neo.entity.TProblem;
 public interface ProblemMapper {
 
 	List<TProblem> showProblem();
-
-	List<TProblem> showAllProblem();
 	
-	TProblem showProblemDetails(@Param("problemId")String id);
+	List<TProblem> showAllProblem();
 
-	List<TProblem> findProblemByTitleOrStatus(@Param("title")String title, @Param("status")String status);
+	List<TProblem> showProblems(@Param("pageCurrent") Integer pageCurrent, @Param("showAmount") Integer showAmount);
+	
+	TProblem showProblemDetails(@Param("problemId")String id); // JSON.stringify()
+
+	List<TProblem> findProblemByTitleOrStatuAll(@Param("title")String title, @Param("status")String status);
+	
+	List<TProblem> findProblemByTitleOrStatus(@Param("title")String title, @Param("status")String status, 
+			@Param("startIndex") Integer startIndex, @Param("showAmount") Integer showAmount);
 
 	Integer updateProblem(TProblem problem);
 

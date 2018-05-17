@@ -1,10 +1,13 @@
 package com.neo.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neo.entity.BaseDataResp;
@@ -26,7 +29,7 @@ public class LoginController {
 	
 	@RequestMapping("/checkLogin")
 	@ResponseBody
-	public BaseDataResp checkLogin(@RequestBody UserBean util) {
+	public BaseDataResp checkLogin(@RequestBody UserBean util, HttpServletRequest request, HttpServletResponse response) {
 		BaseDataResp resp = new BaseDataResp();
 		User user = loginMapper.userLogin(util.getUsername(), util.getPassword());
 		if(user == null) {
@@ -37,7 +40,17 @@ public class LoginController {
 		resp.setCode("000000");
 		resp.setMessage("成功");
 		resp.setData(user);
+		HttpSession session = request.getSession(true);
+		session.setAttribute("username", user.getUsername());
+		session.setAttribute("userId", user.getId());
 		return resp;
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("username");
+		session.removeAttribute("userId");
+		return "login";
 	}
 	
 }

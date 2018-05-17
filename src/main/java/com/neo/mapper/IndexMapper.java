@@ -10,7 +10,9 @@ public interface IndexMapper {
 
 	List<TProduct> showIndex();
 	
-	List<TProduct> showProduct();
+	List<TProduct>  showProductAll();
+	
+	List<TProduct> showProduct(@Param("startIndex") Integer startIndex, @Param("showAmount") Integer showAmount);
 	
 	TProduct findProductById(@Param("id") String productId);
 	
@@ -18,6 +20,12 @@ public interface IndexMapper {
 	
 	Integer insertProduct(TProduct product);
 
-	List<TProduct> findProductByTitleOrStatus(@Param("productName")String productName, @Param("status")String status);
+	List<TProduct> findProductByTitleOrStatusAll(@Param("productName") String productName, 
+			@Param("status") String status);
+	
+	List<TProduct> findProductByTitleOrStatus(@Param("productName") String productName, 
+			@Param("status") String status, 
+			@Param("startIndex") Integer startIndex, 
+			@Param("showAmount") Integer showAmount);
 	
 }

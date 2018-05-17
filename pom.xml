@@ -72,25 +72,16 @@
 		</dependency>
 		
 		<!-- dbcp 连接池引入 -->
-
         <dependency>
-
             <groupId>commons-dbcp</groupId>
-
             <artifactId>commons-dbcp</artifactId>
-
             <version>1.4</version>
-
         </dependency>
 
         <dependency>
-
             <groupId>commons-pool</groupId>
-
             <artifactId>commons-pool</artifactId>
-
             <version>1.4</version>
-
         </dependency>
 		<!-- dbcp 连接池引入 end -->
 		
@@ -153,9 +144,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-
-		<finalName>test</finalName>
+		<finalName>spring-boot-mybatis-xml</finalName>
 	</build>
-
-
 </project>

@@ -1,6 +1,9 @@
 $(document).ready(function(){
 	//模态框的.ok按钮上注册点击事件
    $("#modal-dialog").on("click",".ok",doSaveOrUpdate);
+   
+   $("#dayRate, #monthRate, #yearRate").on("blur", checkRateFormat);
+   
    //在模态框隐藏后移除ok上注册的事件,防止数据多次提交.
    $("#modal-dialog").on("hidden.bs.modal",function() {
 	   $("#modal-dialog").off("click",".ok");
@@ -57,14 +60,16 @@ function doSaveOrUpdate(){
 	//0.验证表单数据是否为空
 	if(!$("#editFormId").valid())return;
 	//1.获得表单数据
-	var params=getEditFormData();
+	var params = getEditFormData();
+	if(!params) {
+		return;
+	}
 	//2.异步提交表单数据
 	var insertProduct="insertProduct";
 	var updateProduct="updateProduct";
 	//获取模态框上绑定的id值.
 //	var id=$("#modal-dialog").data("idKey");
 	//根据id判定是insert还是update
-//	var url=id?updateUrl:insertUrl;
 	var id = $("#productId").val();
 	var url=id?updateProduct:insertProduct;
 	//在修改时需要id的值,所以假如是修改需要动态添加id
@@ -75,7 +80,6 @@ function doSaveOrUpdate(){
 	     "type": "POST",
 	     "contentType": "application/json;charset=utf-8",
 	     "success": function(obj){
-	    	 $("#errorInfo").text();
 	 		if(obj.code == "000000"){
 	 			//隐藏模态框
 	 			$("#modal-dialog").modal("hide");
@@ -101,30 +105,82 @@ function doSaveOrUpdate(){
 /*获取表单数据*/
 function getEditFormData(){
 //	var params = $("#editFormId").serialize();
+	$("#errorInfo").text("");
+	var dayRate = $("#dayRate").val();
+	var monthRate = $("#monthRate").val();
+	var yearRate = $("#yearRate").val();
 	
-//	var params=JSON.stringify({
-//		id:$("#modal-dialog").data("idKey"),
-//		productName:$("#productName").val(),
-//		status:$("input[type='radio']:checked").val()
-//	})//JSON 对象JSON.stringify(
-//	alert($("#amountLimit").val());
+	var id = $("#productId").val();
+	if(!id) {
+		if(!dayRate) {
+			if(!monthRate) {
+				if(!yearRate) {
+					$("#errorInfo").text("至少填写一项利率").css("color", "red");
+					return;
+				}
+			}
+		}
+	}
+	
+	var status = $("input[name='status']:checked").val();
+	if(!status) {
+		$("#errorInfo").text("至少选择一项状态！").css("color", "red");
+		return;
+	}
+	
+	var isDefault = $("input[name='isDefault']:checked").val();
+	if(!isDefault) {
+		$("#errorInfo").text("至少选择一项是否推荐！").css("color", "red");
+		return;
+	}
 	
 	var params = JSON.stringify({
-		id:$("#productId").val(),
+		id:id,
 		productType:$("#productType").val(),
 		productName:$("#productName").val(),
 		productPictureUrl:$("#productPictureUrl").val(),
-		dayRate:$("#dayRate").val(),
-		monthRate:$("#monthRate").val(),
-		yearRate:$("#yearRate").val(),
+		dayRate:dayRate,
+		monthRate:monthRate,
+		yearRate:yearRate,
 		borrowPeriods:$("#borrowPeriods").val(),
-		status:$("input[name='status']:checked").val(),
+		status:status,
 		outUrl:$("#outUrl").val(),
 		amountLimit:$("#amountLimit").val(),
 		bizTime:$("#bizTime").val(),
-		isDefault:$("input[name='isDefault']:checked").val(),
+		isDefault:isDefault,
 		logoTip:$("#logoTip").val(),
 		productTip:$("#productTip").val()
 	})
 	return params;
 }
+
+function checkRateFormat(e) {
+//	setTimeout(function() {  //进行延时处理，时间单位为千分之一秒
+//        $('#auth_code').parent().find('.icon-clear').hide();
+//    }, 100)
+	var patrn = /^[0]+(.[0-9]{1,4})$/;
+	let num = this.value;
+//	alert(num);
+	if(num) {
+		if(!patrn.test(num)) {
+			$("#errorInfo").text("利率格式不对，请重新输入").css("color", "red");
+			this.style.color = "red";
+		}else {
+			$("#errorInfo").text("");
+			this.style.color = "black";
+		}
+	}else {
+		$("#errorInfo").text("");
+		this.style.color = "black";
+	}
+}
+
+//$('#auth_code').blur(function() {
+//    setTimeout(function() {  //进行延时处理，时间单位为千分之一秒
+//        $('#auth_code').parent().find('.icon-clear').hide();
+//    }, 100)
+//}).focus(function(){
+//    if($(this).val() != ''){
+//        $(this).parent().find('.icon-clear').css('display', 'table-cell');
+//    }
+//});

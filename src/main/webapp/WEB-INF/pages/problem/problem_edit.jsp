@@ -8,6 +8,7 @@ $('.datepicker').datepicker({
 })
 </script>
 <form  class="form-horizontal" role="form" id="editFormId">
+	<span id="errorInfo"></span>
 	<div class="form-group hide">
 		<label for="nameId" class="col-sm-2 control-label" >问题id:</label> 
 	    <div class="col-sm-10">
@@ -30,7 +31,7 @@ $('.datepicker').datepicker({
     <div class="form-group">
 		<label for="project-code" class="col-sm-2 control-label">问题内容:</label> 
 		<div class="col-sm-10">
-		<input type="text" class="form-control required" name="content" id="content" placeholder="请输入内容">
+			<textarea class="form-control required" maxlength="500" name="content" id="content" placeholder="请输入内容，500字内" style="height:180px;resize:none;"></textarea>
 		</div>
 	</div>
 </form>

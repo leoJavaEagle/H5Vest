@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="base" scope="request" value="${pageContext.request.contextPath }"></c:set>
 <header class="main-header">
     <!-- Logo -->
     <a href="#" class="logo">
@@ -32,8 +34,16 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="${basePath}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">欢迎您,马哥</span>
+	            <c:choose>
+	              <c:when test="${username == null }">
+	                <li><a href="${base }/console/login">登录</a></li>
+	              </c:when>
+	              <c:otherwise>
+	              	<img src="${basePath}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+	                <span class="hidden-xs">欢迎您  ${username }</span>
+	                <li><a href="${base }/console/logout">退出</a></li>
+	              </c:otherwise>
+	            </c:choose>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
