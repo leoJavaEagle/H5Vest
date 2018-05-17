@@ -61,12 +61,6 @@ public class IndexContoller {
 		}
 	}
 	
-	@Test
-	public void showProblemDetails() {
-		List<TProblem> list = problemMapper.showProblemDetails("2");
-		System.out.println(list.get(0).getTitle());
-		System.out.println(list.get(0).getContent());
-	}
 	
 	@Test
 	public void vestTest() {

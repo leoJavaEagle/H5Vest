@@ -50,7 +50,7 @@ public class UserControllerTest {
                 .accept(MediaType.APPLICATION_JSON_UTF8)).andDo(print());
     }
     
-    @Test
+//    @Test
     public void test() {
     	List<TArticle> ta=articleMapper.getAll();
     	for (TArticle tArticle : ta) {
@@ -60,12 +60,12 @@ public class UserControllerTest {
     
     @Test
     public void test1() {
-    	TModel model = vestMapper.showModel("ios", "ios");
-    	if(model==null){
-    		System.out.println("sql出错");
-    	}else{
-    		System.out.println(model.getIndex()+" , "+model.getArticle()+" , "+model.getCounter()+" , "+model.getMine());
-    	}
+//    	TModel model = vestMapper.showModel("ios", "ios");
+//    	if(model==null){
+//    		System.out.println("sql出错");
+//    	}else{
+//    		System.out.println(model.getIndex()+" , "+model.getArticle()+" , "+model.getCounter()+" , "+model.getMine());
+//    	}
     	
     	TModel model1 = vestMapper.showModelAndStatus("android", "QDVVVVHW20180131102552786");
     	if(model1==null){
@@ -79,7 +79,7 @@ public class UserControllerTest {
 //    	System.out.println(status);
 	}
     
-    @Test
+//    @Test
     public void test2() {
     	User user = loginMapper.userLogin("lisi", "123");
     	System.out.println(user.getUsername());

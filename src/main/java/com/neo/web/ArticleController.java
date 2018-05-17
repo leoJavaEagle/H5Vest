@@ -1,19 +1,30 @@
 package com.neo.web;
 
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 import java.util.List;
+
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import com.neo.entity.BaseDataResp;
+import com.neo.entity.ResponseResult;
 import com.neo.entity.TArticle;
 import com.neo.mapper.ArticleMapper;
+import com.neo.utils.FileUtil;
+
 
 @Controller
 public class ArticleController {
@@ -165,6 +176,57 @@ public class ArticleController {
     	return resp;
     	
     }
+    
+    //处理文件上传
+    @RequestMapping(value="/testuploadimg")
+    @ResponseBody
+    public ResponseResult uploadImg(@RequestParam("file") MultipartFile file,
+            HttpServletRequest request) {
+    	String msg="";//返回存储路径
+        int code=1;
+        String contentType = file.getContentType();
+        String fileName = file.getOriginalFilename();
+        System.out.println("fileName-->" + fileName);
+        System.out.println("getContentType-->" + contentType);
+        String filePath = request.getSession().getServletContext().getRealPath("imgupload/");
+        String filePath1 = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/imgupload/";
+        System.out.println(filePath);
+        System.out.println(filePath1);
+        
+        String newfileName = FileUtil.getUUID();//生成新名称
+        
+        FileUtil.renameFile(filePath, fileName, newfileName);//替换图片名称
+        
+        /*-----------------------获取Linux服务器产生的ip-----------------------*/
+//        Enumeration<NetworkInterface> netInterfaces = null;
+//        try {
+//                netInterfaces = NetworkInterface.getNetworkInterfaces();
+//                while (netInterfaces.hasMoreElements()) {
+//                        NetworkInterface ni = netInterfaces.nextElement();
+//                        System.out.println("DisplayName:" + ni.getDisplayName());
+//                        System.out.println("Name:" + ni.getName());
+//                        Enumeration<InetAddress> ips = ni.getInetAddresses();
+//                        while (ips.hasMoreElements()) {
+//                                System.out.println("IP:"
+//                                + ips.nextElement().getHostAddress());
+//                        }
+//                }
+//        } catch (Exception e) {
+//                e.printStackTrace();
+//        }
+        /*----------------------------------------------*/
+        
+        try {
+            FileUtil.uploadFile(file.getBytes(), filePath, newfileName);
+            msg=filePath1+newfileName;
+            code=0;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        //返回json
+        return ResponseResult.result(code, msg);
+    }
+    
     
     
 }

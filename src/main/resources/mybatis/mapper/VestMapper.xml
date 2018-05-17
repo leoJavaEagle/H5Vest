@@ -16,7 +16,7 @@
         <result column="status" property="status" jdbcType="VARCHAR" />
     </resultMap>
 	
-	<select id="findAuditingstatus" resultType="String">
+	<select id="findAuditingStatus" resultType="String">
 		SELECT 
 			status 
 		FROM t_model 
@@ -30,7 +30,7 @@
 		WHERE source = #{source} AND market_code = #{marketCode}
 	</select>
 	
-	<select id="showModelAndstatus" resultType="com.neo.entity.TModel">
+	<select id="showModelAndStatus" resultType="com.neo.entity.TModel">
 		SELECT 
 			tm.index, tm.article, tm.counter, tm.mine, tm.status
 		FROM t_model tm

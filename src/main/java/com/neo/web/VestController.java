@@ -45,7 +45,7 @@ public class VestController {
 			resp.setCode("000000");
 			resp.setMessage("审核结束");
 		}
-		resp.setData(statusInfo);
+//		resp.setData(statusInfo);
 		return resp;
 	}
 	
@@ -80,7 +80,7 @@ public class VestController {
 	@RequestMapping("/showModelAndStatus")
 	@ResponseBody
 	public BaseDataResp showModelAndStatus(@RequestBody Source util) {
-//		System.out.println(util.getSource() + ",1  " + util.getMarketCode());
+		System.out.println(util.getSource() + ",1  " + util.getMarketCode());
 		BaseDataResp resp = new BaseDataResp();
 		TModel model = vestMapper.showModelAndStatus(util.getSource(), util.getMarketCode());
 		if(model == null) {

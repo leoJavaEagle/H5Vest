@@ -230,4 +230,24 @@ public class IndexController {
 		return resp;
 	}
 	
+	/**
+	 * 获取所有资讯文章
+	 * @return
+	 */
+	@RequestMapping("/showArticle")
+	public ModelAndView getArticles() {
+		ModelAndView mv = new ModelAndView("article/article_list");
+		return mv;
+	}
+	
+	/**
+	 * 获取
+	 * @return
+	 */
+	@RequestMapping("/showModel")
+	public ModelAndView getModel() {
+		ModelAndView mv = new ModelAndView("model/model_list");
+		return mv;
+	}
+	
 }

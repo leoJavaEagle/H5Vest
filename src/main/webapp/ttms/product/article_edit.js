@@ -30,7 +30,9 @@ function doFindObjectById(id){
 }
 /*修改初始化表单数据*/
 function doInitFormData(data){
+	console.log(data);
 	$("#title").val(data.title);
+	$("#thumburlShow").attr("src",data.image);
 	$("#contentOne").val(data.contentOne);
 	$("#contentTwo").val(data.contentTwo);
 //	$("#createTime").val(data.createTime);
@@ -77,7 +79,9 @@ function doSaveOrUpdate(){
 function getEditFormData(){
 	var params={
 	  title:$("#title").val(),
+	  image:$("#image").val(),
 	  contentOne:$("#contentOne").val(),
+	  pictureOne:$("#pictureOne").val(),
 	  contentTwo:$("#contentTwo").val(),
 //	  createTime:$("#createTime").val(),
 	  readCount:$("#readCount").val(),
@@ -85,4 +89,53 @@ function getEditFormData(){
 //	  note:$("#noteId").val()
 	}//JSON 对象
 	return params;
+}
+
+/**
+ * 用于进行图片上传，返回地址
+ * @param obj
+ * @returns
+ */
+function setImg(obj){
+    var f=$(obj).val();
+    if(f == null || f ==undefined || f == ''){
+        return false;
+    }
+    if(!/\.(?:png|jpg|bmp|gif|PNG|JPG|BMP|GIF)$/.test(f))
+    {
+        alertLayel("类型必须是图片(.png|jpg|bmp|gif|PNG|JPG|BMP|GIF)");
+        $(obj).val('');
+        return false;
+    }
+    var data = new FormData();
+    $.each($(obj)[0].files,function(i,file){
+        data.append('file', file);
+    });
+    $.ajax({
+        type: "POST",
+        url: "/testuploadimg",
+        data: data,
+        cache: false,
+        contentType: false,    //不可缺
+        processData: false,    //不可缺
+        dataType:"json",
+        success: function(suc) {
+        	console.log(suc);
+            if(suc.code==0){
+                    $("#image").val(suc.message);//将地址存储好
+                    $("#thumburlShow").attr("src",suc.message);//显示图片                                                              
+                }else{
+                alert("上传失败");
+                $("#url").val("");
+                $(obj).val('');
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("上传失败，请检查网络后重试");
+            $("#url").val("");
+            $(obj).val('');
+        }
+    });
+
+    
 }

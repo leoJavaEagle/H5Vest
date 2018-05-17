@@ -14,7 +14,7 @@
     </resultMap>
     
     <sql id="Base_Column_List" >
-        id,title,content_one,picture_one,content_two,read_count,image,create_time,status
+        id,title,content_one,content_two,read_count,image,create_time,status
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap"  >
@@ -44,14 +44,15 @@
        		t_article
        		(id,title,content_one,content_two,read_count,image,create_time,status) 
        	VALUES
-       		(FLOOR( 500 + RAND() * (1000 - 500)),#{title,jdbcType=VARCHAR},#{contentOne},#{contentTwo},#{readCount},#{image},NOW(),#{status})
+       		(FLOOR( 500 + RAND() * (1000 - 500)),#{title},#{contentOne},#{contentTwo},#{readCount},#{image},NOW(),#{status})
     </insert>
     
     <update id="update" parameterType="com.neo.entity.TArticle" >
        UPDATE 
        		t_article ta
        SET 
-       	ta.title = #{title,jdbcType=VARCHAR},
+       	ta.title = #{title},
+       	ta.image = #{image},
        	ta.content_one = #{contentOne},
        	ta.content_two = #{contentTwo},
        	ta.read_count = #{readCount},
